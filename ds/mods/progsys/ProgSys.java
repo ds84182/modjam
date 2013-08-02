@@ -12,13 +12,15 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import ds.mods.progsys.blocks.BlockController;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.blocks.BlockWire;
+import ds.mods.progsys.net.PacDispat;
+import ds.mods.progsys.net.PacketHandler;
 import ds.mods.progsys.tile.TileEntityController;
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 import ds.mods.progsys.tile.TileEntityWire;
 
 
 @Mod(modid="ProgSys",name="ProgSys")
-@NetworkMod()
+@NetworkMod(channels={"ProgSys"}, packetHandler=PacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class ProgSys {
 	
 	public static BlockController controller;
@@ -56,5 +58,6 @@ public class ProgSys {
 		LanguageRegistry.instance().loadLocalization("/assets/progsys/lang/en_US.lang", "en_US", false);
 		
 		proxy.registerRenderInfo();
+		PacDispat.initPacketStuff();
 	}
 }

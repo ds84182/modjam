@@ -7,6 +7,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import ds.mods.progsys.net.InventoryInfo;
+import ds.mods.progsys.net.PacDispat;
 import ds.mods.progsys.wirednet.Network;
 import ds.mods.progsys.wirednet.NetworkDiscovery;
 import ds.mods.progsys.wirednet.Vector3;
@@ -16,6 +18,7 @@ import ds.mods.progsys.wirednet.netbase.DriverNetworkBase;
 public class TileEntityInventoryInterface extends TileEntityNetworkBase implements IOnPlace, IOnRemove {
 	public ForgeDirection facing = ForgeDirection.DOWN;
 	public ItemDriver driver;
+	public int tickDown = 20;
 
 	@Override
 	public boolean canBeAddedToNetwork(Network net, ForgeDirection side) {
@@ -53,6 +56,15 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public void updateEntity()
 	{
 		super.updateEntity();
+		if (this.showHolo && driver.inv != null)
+		{
+			tickDown--;
+			if (tickDown == 0)
+			{
+				tickDown = 20;
+				PacDispat.sendPacketToDimension(new InventoryInfo(driver.inv), worldObj.provider.dimensionId);
+			}
+		}
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
 		{
 			facing = ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()];
