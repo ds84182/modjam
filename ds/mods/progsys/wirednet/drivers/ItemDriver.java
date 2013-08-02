@@ -29,12 +29,12 @@ public class ItemDriver implements IDriver {
 
 	@Override
 	public int getSize() {
-		return inv.getSizeInventory();
+		return inv != null ? inv.getSizeInventory() : 0;
 	}
 
 	@Override
 	public ItemStack getStack(int slot) {
-		return inv.getStackInSlot(slot);
+		return inv != null ? inv.getStackInSlot(slot) : null;
 	}
 
 	@Override
