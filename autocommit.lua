@@ -16,4 +16,10 @@ function commit()
 	os.execute('git push')
 end
 
-commit()
+while true do
+	local lasttime = os.time()
+	while os.time()-lasttime < 60*15 do
+		
+	end
+	commit()
+end
