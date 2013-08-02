@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.mods.progsys.tile.IOnPlace;
+import ds.mods.progsys.tile.IOnRemove;
 import ds.mods.progsys.tile.TileEntityController;
 
 public class BlockController extends Block {
@@ -73,6 +74,17 @@ public class BlockController extends Block {
 		TileEntityController tile = (TileEntityController) par1World.getBlockTileEntity(par2, par3, par4);
 		tile.showHolo = !tile.showHolo;
 		return true;
+	}
+
+	@Override
+	public void breakBlock(World par1World, int par2, int par3, int par4,
+			int par5, int par6) {
+		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+		if (tile instanceof IOnRemove)
+		{
+			((IOnRemove)tile).onRemove();
+		}
+		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
 
 }

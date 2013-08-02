@@ -18,7 +18,7 @@ public class DriverNetworkBase implements INetworkBase {
 
 	@Override
 	public Vector3 getPosition() {
-		return null;
+		return pos;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class DriverNetworkBase implements INetworkBase {
 
 	@Override
 	public IDriver getInterfaceDriver() {
-		return null;
+		return driver;
 	}
 
 }

@@ -42,11 +42,13 @@ public class Controller {
 		}
 		if (dirtyDrivers)
 		{
+			System.out.println("Drivers dirty");
 			driverList.clear();
 			for (INetworkBase netbase : tile.net.tileMap.values())
 			{
 				if (netbase.getType() == EnumNBType.INTERFACE)
 				{
+					System.out.println("Found "+netbase);
 					driverList.add(netbase.getInterfaceDriver());
 				}
 			}
@@ -57,25 +59,32 @@ public class Controller {
 		{
 			//Finding out of place items in item drivers
 			if (driver != null)
-			if (driver.getType() == EnumDriverType.ITEM)
 			{
-				ItemFilter filter = driver.getItemFilter();
-				for (int i = 0; i<driver.getSize(); i++)
+				if (driver.getType() == EnumDriverType.ITEM)
 				{
-					ItemStack stack = driver.getStack(i);
-					if (stack != null)
+					//System.out.println("Itemdriver");
+					ItemFilter filter = driver.getItemFilter();
+					for (int i = 0; i<driver.getSize(); i++)
 					{
-						if (!filter.matchesFilter(stack) && !moveQueue.contains(new StackInfo(driver, i)))
+						ItemStack stack = driver.getStack(i);
+						if (stack != null)
 						{
-							//Add it onto the move queue
-							moveQueue.push(new StackInfo(driver, i));
-						}
-						else if (filter.matchesFilter(stack))
-						{
-							System.out.println(stack.getItem()+" ok!");
+							if (!filter.matchesFilter(stack) && !moveQueue.contains(new StackInfo(driver, i)))
+							{
+								//Add it onto the move queue
+								moveQueue.push(new StackInfo(driver, i));
+							}
+							else if (filter.matchesFilter(stack))
+							{
+								System.out.println(stack.getItem().getUnlocalizedName()+" ok!");
+							}
 						}
 					}
 				}
+			}
+			else
+			{
+				//System.out.println("NULLDRIVER");
 			}
 		}
 		

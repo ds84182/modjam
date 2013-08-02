@@ -9,7 +9,7 @@ import ds.mods.progsys.wirednet.drivers.ItemDriver;
 import ds.mods.progsys.wirednet.netbase.DriverNetworkBase;
 
 public class TileEntityInventoryInterface extends TileEntityNetworkBase {
-	public ForgeDirection facing;
+	public ForgeDirection facing = ForgeDirection.DOWN;
 	public ItemDriver driver;
 
 	@Override
