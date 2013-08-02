@@ -1,5 +1,7 @@
 package ds.mods.progsys.wirednet;
 
+import net.minecraftforge.common.ForgeDirection;
+
 public class Vector3 {
 	public int x;
 	public int y;
@@ -36,5 +38,9 @@ public class Vector3 {
 	@Override
 	public String toString() {
 		return "["+x+","+y+","+z+"]";
+	}
+
+	public Vector3 add(ForgeDirection fdir) {
+		return new Vector3(x+fdir.offsetX,y+fdir.offsetY,z+fdir.offsetZ);
 	}
 }
