@@ -18,8 +18,5 @@ end
 
 while true do
 	commit()
-	local lasttime = os.time()
-	while os.time()-lasttime < 60*15 do
-		
-	end
+	os.execute("sleep "..(60*15))
 end
