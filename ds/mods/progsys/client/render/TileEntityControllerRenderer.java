@@ -1,16 +1,12 @@
 package ds.mods.progsys.client.render;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import ds.mods.progsys.client.holo.HoloController;
 import ds.mods.progsys.client.holo.HoloUtils;
 import ds.mods.progsys.tile.TileEntityController;
 
@@ -26,6 +22,8 @@ public class TileEntityControllerRenderer extends TileEntitySpecialRenderer {
 			GL11.glPushMatrix();
 			{
 				GL11.glTranslated(d0, d1, d2);
+				if (tile.gui == null)
+					tile.gui = new HoloController(tile);
 				HoloUtils.renderHolo(tile.gui);
 			}
 			GL11.glPopMatrix();

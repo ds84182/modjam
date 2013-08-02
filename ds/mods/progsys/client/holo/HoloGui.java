@@ -7,7 +7,7 @@ import net.minecraft.client.gui.Gui;
 public abstract class HoloGui extends Gui {
 	public FontRenderer font;
 	
-	public HoloGui()
+	protected HoloGui()
 	{
 		font = Minecraft.getMinecraft().fontRenderer;
 	}

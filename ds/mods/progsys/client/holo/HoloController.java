@@ -11,6 +11,7 @@ public class HoloController extends HoloGui {
 	
 	public HoloController(TileEntityController t)
 	{
+		super();
 		tile = t;
 	}
 
