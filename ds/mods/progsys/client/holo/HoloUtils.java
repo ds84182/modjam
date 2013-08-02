@@ -30,9 +30,9 @@ public class HoloUtils {
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
 		{
-			GL11.glRotatef(180F, 0F, 1F, 0F);
-			GL11.glTranslated(-2D, 4.5D, -0.4999D);
-			GL11.glScalef(1/64F, -1/64F, 1/64F);
+			//GL11.glRotatef(180F, 0F, 1F, 0F);
+			GL11.glTranslated(2D, 4.5D, 0.4999D);
+			GL11.glScalef(-1/64F, -1/64F, 1/64F);
 			gui.drawBackground();
 			GL11.glTranslated(0D, 0D, -0.0001D);
 			gui.draw();
@@ -46,17 +46,24 @@ public class HoloUtils {
 		GL11.glBegin(GL11.GL_QUADS);
 		
 		GL11.glVertex3f(-1F, 1.5F, 0.5F);
-		GL11.glVertex3f(2F, 1.5F, 0.5F);
-		GL11.glVertex3f(2F, 4.5F, 0.5F);
 		GL11.glVertex3f(-1F, 4.5F, 0.5F);
+		GL11.glVertex3f(2F, 4.5F, 0.5F);
+		GL11.glVertex3f(2F, 1.5F, 0.5F);
+		
+		GL11.glEnd();
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		
+		GL11.glVertex3f(-1F, 1.5F, 0.5F);
+		GL11.glVertex3f(2F, 1.5F, 0.5F);
+		GL11.glVertex3f(0.5F, 1F, 0.5F);
 		
 		GL11.glEnd();
 		GL11.glBegin(GL11.GL_QUADS);
 		
 		GL11.glVertex3f(-1F, 1.5F, 0.5F);
-		GL11.glVertex3f(-1F, 4.5F, 0.5F);
+		GL11.glVertex3f(2F, 1.5F, 0.5F);
 		GL11.glVertex3f(2F, 4.5F, 0.5F);
-		GL11.glVertex3f(2F, 1.5F, 0.5F);
+		GL11.glVertex3f(-1F, 4.5F, 0.5F);
 		
 		GL11.glEnd();
 		GL11.glBegin(GL11.GL_TRIANGLES);
@@ -64,13 +71,6 @@ public class HoloUtils {
 		GL11.glVertex3f(-1F, 1.5F, 0.5F);
 		GL11.glVertex3f(0.5F, 1F, 0.5F);
 		GL11.glVertex3f(2F, 1.5F, 0.5F);
-		
-		GL11.glEnd();
-		GL11.glBegin(GL11.GL_TRIANGLES);
-		
-		GL11.glVertex3f(-1F, 1.5F, 0.5F);
-		GL11.glVertex3f(2F, 1.5F, 0.5F);
-		GL11.glVertex3f(0.5F, 1F, 0.5F);
 		
 		GL11.glEnd();
 	}
