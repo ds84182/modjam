@@ -7,10 +7,10 @@
 	git push
 ]]
 function commit()
-	os.execute("rm -rf assets")
-	os.execute("rm -rf ds")
-	os.execute('cp "C:/Users/Dwayne/Games/MCForge/1.6.2_804/forge/mcp/src/minecraft/assets" assets')
-	os.execute('cp "C:/Users/Dwayne/Games/MCForge/1.6.2_804/forge/mcp/src/minecraft/ds" ds')
+	os.execute("rm assets -recurse")
+	os.execute("rm ds -recurse")
+	os.execute('cp "C:/Users/Dwayne/Games/MCForge/1.6.2_804/forge/mcp/src/minecraft/assets" assets -recurse')
+	os.execute('cp "C:/Users/Dwayne/Games/MCForge/1.6.2_804/forge/mcp/src/minecraft/ds" ds -recurse')
 	os.execute('git add .')
 	os.execute('git commit -m "15 minute commit"')
 	os.execute('git push')
