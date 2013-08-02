@@ -8,6 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import ds.mods.progsys.wirednet.Network;
 import ds.mods.progsys.wirednet.NetworkDiscovery;
+import ds.mods.progsys.wirednet.Vector3;
+import ds.mods.progsys.wirednet.netbase.WireNetworkBase;
 
 public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace {
 
@@ -18,7 +20,7 @@ public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace {
 
 	@Override
 	public void createNetworkBase(Network net) {
-		
+		netbase = new WireNetworkBase(new Vector3(xCoord,yCoord,zCoord));
 	}
 
 	@Override

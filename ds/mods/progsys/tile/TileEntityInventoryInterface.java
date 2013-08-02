@@ -26,6 +26,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase {
 	@Override
 	public void createDefaultNetwork() {
 		net = new Network(worldObj);
+		net.add(this);
 	}
 	
 	public boolean inventoryExists()
@@ -46,6 +47,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase {
 	@Override
 	public void updateEntity()
 	{
+		super.updateEntity();
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
 		{
 			facing = ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()];
@@ -60,10 +62,11 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase {
 		}
 		else
 		{
-			if (driver.inv != getInventory())
-			{
-				driver.inv = getInventory();
-			}
+			if (driver != null)
+				if (driver.inv != getInventory())
+				{
+					driver.inv = getInventory();
+				}
 		}
 	}
 

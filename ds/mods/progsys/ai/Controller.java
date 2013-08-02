@@ -38,6 +38,7 @@ public class Controller {
 		if (tile.net != net)
 		{
 			dirtyDrivers = true;
+			net = tile.net;
 		}
 		if (dirtyDrivers)
 		{
@@ -49,11 +50,13 @@ public class Controller {
 					driverList.add(netbase.getInterfaceDriver());
 				}
 			}
+			dirtyDrivers = false;
 		}
 		
 		for (IDriver driver : driverList)
 		{
 			//Finding out of place items in item drivers
+			if (driver != null)
 			if (driver.getType() == EnumDriverType.ITEM)
 			{
 				ItemFilter filter = driver.getItemFilter();
