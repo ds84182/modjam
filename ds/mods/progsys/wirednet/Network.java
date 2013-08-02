@@ -33,7 +33,7 @@ public class Network {
 		if (nb instanceof TileEntityController)
 		{
 			controller = netbase;
-			sys = ((TileEntityController)netbase).controller;
+			sys = ((TileEntityController)nb).controller;
 		}
 		if (sys != null)
 		{

@@ -53,6 +53,8 @@ public class ProgSys {
 		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
 		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInventoryInterface");
 		
+		LanguageRegistry.instance().loadLocalization("/assets/progsys/lang/en_US.lang", "en_US", false);
+		
 		proxy.registerRenderInfo();
 	}
 }

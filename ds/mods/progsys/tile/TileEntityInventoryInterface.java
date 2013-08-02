@@ -48,6 +48,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase {
 	{
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
 		{
+			facing = ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()];
 			//Dir changed!
 			if (inventoryExists())
 			{
