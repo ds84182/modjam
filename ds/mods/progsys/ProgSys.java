@@ -10,8 +10,10 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ds.mods.progsys.blocks.BlockController;
+import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.blocks.BlockWire;
 import ds.mods.progsys.tile.TileEntityController;
+import ds.mods.progsys.tile.TileEntityInventoryInterface;
 import ds.mods.progsys.tile.TileEntityWire;
 
 
@@ -21,6 +23,7 @@ public class ProgSys {
 	
 	public static BlockController controller;
 	public static BlockWire wire;
+	public static BlockInventoryInterface iinterface;
 	
 	
 	@SidedProxy(serverSide = "ds.mods.progsys.CommonProxy",clientSide = "ds.mods.progsys.client.ClientProxy")
@@ -44,6 +47,11 @@ public class ProgSys {
 		GameRegistry.registerBlock(wire, "Wire");
 		LanguageRegistry.addName(wire, "ds.progsys.wire");
 		GameRegistry.registerTileEntity(TileEntityWire.class, "teWire");
+		
+		iinterface = new BlockInventoryInterface(Config.ItemInterfacerID, Material.rock);
+		GameRegistry.registerBlock(iinterface, "InventoryInterface");
+		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
+		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInventoryInterface");
 		
 		proxy.registerRenderInfo();
 	}

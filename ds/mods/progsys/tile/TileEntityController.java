@@ -9,12 +9,15 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.mods.progsys.ai.Controller;
 import ds.mods.progsys.wirednet.Network;
 import ds.mods.progsys.wirednet.NetworkDiscovery;
 import ds.mods.progsys.wirednet.Vector3;
 import ds.mods.progsys.wirednet.netbase.ControllerNetworkBase;
 
 public class TileEntityController extends TileEntityNetworkBase implements IOnPlace {
+	
+	public Controller controller = new Controller(this);
 
 	@Override
 	public boolean canBeAddedToNetwork(Network net, ForgeDirection side) {
@@ -78,6 +81,12 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 	public void createDefaultNetwork() {
 		net = new Network(worldObj);
 		net.add(this);
+	}
+
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		controller.runTick();
 	}
 
 }

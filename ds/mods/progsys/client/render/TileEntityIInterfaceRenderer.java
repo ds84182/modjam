@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import ds.mods.progsys.client.holo.HoloController;
+import ds.mods.progsys.client.holo.HoloInventoryInterface;
 import ds.mods.progsys.client.holo.HoloUtils;
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 
@@ -22,7 +22,7 @@ public class TileEntityIInterfaceRenderer extends TileEntitySpecialRenderer {
 			{
 				GL11.glTranslated(d0, d1, d2);
 				if (tile.gui == null)
-					tile.gui = new HoloController(tile);
+					tile.gui = new HoloInventoryInterface(tile);
 				HoloUtils.renderHolo(tile.gui);
 			}
 			GL11.glPopMatrix();

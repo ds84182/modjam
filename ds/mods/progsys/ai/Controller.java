@@ -17,7 +17,7 @@ public class Controller {
 	private TileEntityController tile;
 	private Network net;
 	private ArrayList<IDriver> driverList = new ArrayList<IDriver>();
-	private boolean dirtyDrivers = true;
+	public boolean dirtyDrivers = true;
 	private Stack<StackInfo> moveQueue = new Stack<Controller.StackInfo>();
 	
 	public Controller(TileEntityController t)
@@ -60,10 +60,17 @@ public class Controller {
 				for (int i = 0; i<driver.getSize(); i++)
 				{
 					ItemStack stack = driver.getStack(i);
-					if (!filter.matchesFilter(stack) && !moveQueue.contains(new StackInfo(driver, i)))
+					if (stack != null)
 					{
-						//Add it onto the move queue
-						moveQueue.push(new StackInfo(driver, i));
+						if (!filter.matchesFilter(stack) && !moveQueue.contains(new StackInfo(driver, i)))
+						{
+							//Add it onto the move queue
+							moveQueue.push(new StackInfo(driver, i));
+						}
+						else if (filter.matchesFilter(stack))
+						{
+							System.out.println(stack.getItem()+" ok!");
+						}
 					}
 				}
 			}
