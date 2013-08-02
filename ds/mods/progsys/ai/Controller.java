@@ -74,7 +74,7 @@ public class Controller {
 								//Add it onto the move queue
 								moveQueue.push(new StackInfo(driver, i));
 							}
-							else if (filter.matchesFilter(stack))
+							else if (filter.matchesFilter(stack) && tile.worldObj != null)
 							{
 								System.out.println(stack.getItem().getUnlocalizedName()+" ok!");
 							}

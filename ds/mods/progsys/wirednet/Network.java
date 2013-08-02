@@ -41,6 +41,14 @@ public class Network {
 		}
 		tileMap.put(new Vector3(nb.xCoord,nb.yCoord,nb.zCoord), netbase);
 	}
+
+	public void remove(TileEntityNetworkBase nb) {
+		tileMap.remove(nb.netbase.getPosition());
+		if (sys != null)
+		{
+			sys.dirtyDrivers = true;
+		}
+	}
 	
 	
 }

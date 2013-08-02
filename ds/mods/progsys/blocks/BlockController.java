@@ -43,6 +43,12 @@ public class BlockController extends Block {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(int par1, int par2) {
+		return par1 == 0 || par1 == 1 ? blockIcon : blank;
+	}
+
+	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);

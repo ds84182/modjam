@@ -15,7 +15,7 @@ import ds.mods.progsys.wirednet.NetworkDiscovery;
 import ds.mods.progsys.wirednet.Vector3;
 import ds.mods.progsys.wirednet.netbase.ControllerNetworkBase;
 
-public class TileEntityController extends TileEntityNetworkBase implements IOnPlace {
+public class TileEntityController extends TileEntityNetworkBase implements IOnPlace, IOnRemove {
 	
 	public Controller controller = new Controller(this);
 
@@ -87,6 +87,13 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 	public void updateEntity() {
 		super.updateEntity();
 		controller.runTick();
+	}
+
+	@Override
+	public void onRemove() {
+		net.controller = null;
+		net.sys = null;
+		net.remove(this);
 	}
 
 }

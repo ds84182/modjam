@@ -11,7 +11,7 @@ import ds.mods.progsys.wirednet.NetworkDiscovery;
 import ds.mods.progsys.wirednet.Vector3;
 import ds.mods.progsys.wirednet.netbase.WireNetworkBase;
 
-public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace {
+public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace, IOnRemove {
 
 	@Override
 	public boolean canBeAddedToNetwork(Network net, ForgeDirection side) {
@@ -61,6 +61,11 @@ public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace {
 	@Override
 	public void createDefaultNetwork() {
 		net = new Network(worldObj);
+	}
+
+	@Override
+	public void onRemove() {
+		net.remove(this); //TODO: Make Dora explore
 	}
 
 }
