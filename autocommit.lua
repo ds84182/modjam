@@ -7,8 +7,8 @@
 	git push
 ]]
 function commit()
-	os.execute("rm ./assets")
-	os.execute("rm ./ds")
+	os.execute("rm -rf assets")
+	os.execute("rm -rf ds")
 	os.execute("mkdir assets")
 	os.execute("mkdir ds")
 	os.execute('xcopy "C:/Users/Dwayne/Games/MCForge/1.6.2_804/forge/mcp/src/minecraft/assets" assets /e /i /h')
