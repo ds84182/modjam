@@ -9,11 +9,11 @@ public interface IDriver {
 	public boolean hasFilters();
 	
 	//Item driver only
-	public int getStackSize();
+	public int getSize();
 	public ItemStack getStack(int slot);
 	public void setStack(int slot, ItemStack stack);
 	public ItemStack getStackAndRemove(int slot);
-	public ItemStack[] getItemFilters();
+	public ItemFilter getItemFilter();
 	
 	//Fluid driver only
 	//TBH, I have never used the fluid system before.
