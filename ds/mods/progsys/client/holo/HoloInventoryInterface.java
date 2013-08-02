@@ -28,7 +28,7 @@ public class HoloInventoryInterface extends HoloGui {
 			int numOfItems = 0;
 			for (int i = 0; i<tile.driver.inv.getSizeInventory(); i++)
 			{
-				tile.driver.inv.onInventoryChanged();
+				//tile.driver.inv.
 				if (tile.driver.inv.getStackInSlot(i) != null) numOfItems++;
 			}
 			drawString(font,"Items: "+numOfItems+"/"+tile.driver.inv.getSizeInventory(), 3, 32, 0xFFFFFF);
