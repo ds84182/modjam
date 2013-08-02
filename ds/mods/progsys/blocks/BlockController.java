@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,6 +15,8 @@ import ds.mods.progsys.tile.IOnPlace;
 import ds.mods.progsys.tile.TileEntityController;
 
 public class BlockController extends Block {
+	@SideOnly(Side.CLIENT)
+	public Icon blank;
 
 	public BlockController(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -34,7 +37,8 @@ public class BlockController extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon("progsys:connect");
+		this.blockIcon = par1IconRegister.registerIcon("progsys:controller");
+		blank = par1IconRegister.registerIcon("progsys:blank");
 	}
 
 	@Override
