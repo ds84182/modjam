@@ -37,15 +37,16 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 	public void onPlace(EntityLivingBase entity, ItemStack stack) {
 		//Check surroundings
 		ArrayList<TileEntityNetworkBase> arr = new ArrayList<TileEntityNetworkBase>();
+		ArrayList<ForgeDirection> dirs = new ArrayList<ForgeDirection>();
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 		{
 			TileEntity tile = worldObj.getBlockTileEntity(xCoord+dir.offsetX, yCoord+dir.offsetY, zCoord+dir.offsetZ);
 			if (tile != null & tile instanceof TileEntityNetworkBase)
-				arr.add((TileEntityNetworkBase) tile);
+				arr.add((TileEntityNetworkBase) tile); dirs.add(dir);
 		}
 		
 		if (arr.size() == 1)
-			arr.get(0).net.add(this);
+			arr.get(0).net.add(this,dirs.get(0));
 		else if (arr.size() > 1)
 		{
 			//We have a more complex situation.
@@ -61,7 +62,7 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 				}
 			}
 			if (netsame)
-				firstNet.add(this);
+				firstNet.add(this,dirs.get(0));
 			else
 				NetworkDiscovery.startAdventure(this); //Come on vamanos! Everybody lets go!
 		}

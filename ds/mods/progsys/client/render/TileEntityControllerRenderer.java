@@ -11,7 +11,6 @@ import ds.mods.progsys.client.holo.HoloUtils;
 import ds.mods.progsys.tile.TileEntityController;
 
 public class TileEntityControllerRenderer extends TileEntitySpecialRenderer {
-	private int zLevel = 0;
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,
