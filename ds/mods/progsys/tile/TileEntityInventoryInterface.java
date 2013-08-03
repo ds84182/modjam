@@ -81,6 +81,20 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 				PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 			}
 		}
+		if (worldObj.isRemote)
+		{
+			tickDown--;
+			if (tickDown == 0)
+			{
+				tickDown = 20;
+				fiveSecTickDown--;
+			}
+			if (fiveSecTickDown == 0)
+			{
+				fiveSecTickDown = 5;
+				fiveSecTickDowns++;
+			}
+		}
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
 		{
 			facing = ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()];

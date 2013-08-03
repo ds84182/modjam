@@ -56,6 +56,11 @@ public class PlayerEvents {
 						event.setCanceled(true);
 					}
 				}
+				else
+				{
+					//Hand has something.
+					
+				}
 			}
 		}
 	}
