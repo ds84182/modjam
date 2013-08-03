@@ -1,8 +1,7 @@
 package ds.mods.progsys;
 
-import java.util.logging.Level;
-
 import net.minecraft.block.material.Material;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,6 +14,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import ds.mods.progsys.blocks.BlockController;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.blocks.BlockWire;
+import ds.mods.progsys.events.common.PlayerEvents;
 import ds.mods.progsys.items.ItemWrench;
 import ds.mods.progsys.net.PacDispat;
 import ds.mods.progsys.net.PacketHandler;
@@ -71,6 +71,8 @@ public class ProgSys {
 		LanguageRegistry.addName(wrench, "ds.progsys.wrench");
 		
 		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
+		
+		MinecraftForge.EVENT_BUS.register(new PlayerEvents());
 		
 		proxy.registerRenderInfo();
 		PacDispat.initPacketStuff();

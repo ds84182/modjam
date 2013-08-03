@@ -37,33 +37,6 @@ public class BlockInventoryInterface extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-		TileEntityInventoryInterface tile = (TileEntityInventoryInterface) par1World.getBlockTileEntity(par2, par3, par4);
-		/*
-		 * Hand empty: Toggle holo
-		 * Shift + Hand Empty: Take last block out of filter
-		 * Hand full: Add to filter
-		 * Hand has wrench: Go through sides
-		 * Shift + Hand has wrench: Toggle NOT mode
-		 * Jump + Shift + Hand has wrench: Put wrench into filter
-		 */
-		ItemStack item = par5EntityPlayer.getHeldItem();
-		boolean sneak = par5EntityPlayer.isSneaking();
-		if (item == null)
-		{
-			tile.showHolo = !tile.showHolo;
-		}
-		else if (item == null && sneak)
-		{
-			//TODO: Take out last block
-			System.out.println("SRC");
-		}
-		return true;
-	}
-
-	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
