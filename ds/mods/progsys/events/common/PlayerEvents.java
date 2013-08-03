@@ -48,6 +48,16 @@ public class PlayerEvents {
 						event.setCanceled(true);
 					}
 				}
+				else if (stack.getItem() instanceof ItemWrench && player.isSneaking())
+				{
+					if (event.entityPlayer.worldObj.isRemote)
+					{
+						tile.driver.filter.not = !tile.driver.filter.not;
+						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+						player.swingItem();
+						event.setCanceled(true);
+					}
+				}
 				else if (stack.getItem() instanceof ItemWrench)
 				{
 					if (!event.entityPlayer.worldObj.isRemote)

@@ -108,55 +108,59 @@ public class HoloInventoryInterface extends HoloGui {
 		int stackAt = 0;
 		EntityItem item = new EntityItem(Minecraft.getMinecraft().theWorld);
 		item.hoverStart = 0f;
-		for (int cx = 0; cx<sq; cx++)
+		int cx = 0;
+		int cy = 0;
+		for (stackAt = 0; stackAt<stacks.length; stackAt++)
 		{
-			for (int cy = 0; cy<sq; cy++)
+			//TODO: If slot is empty, go to the next slot
+			if (stackAt<stacks.length && stacks[stackAt] != null)
 			{
-				//TODO: If slot is empty, go to the next slot
-				if (stackAt<stacks.length && stacks[stackAt] != null)
+				this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				GL11.glDisable(GL11.GL_BLEND);
+				item.setEntityItemStack(stacks[stackAt]);
+				item.getEntityItem().stackSize = 1;
+				GL11.glPushMatrix();
+				GL11.glScaled(64D, -64D, 1D);
+				GL11.glTranslated(((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.0625D-0.125D, 0.1D * (back ? 2 : -2));
+				if (!(stacks[stackAt].getItem() instanceof ItemBlock))
 				{
-					this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
-					GL11.glEnable(GL11.GL_TEXTURE_2D);
-					GL11.glDisable(GL11.GL_BLEND);
-					item.setEntityItemStack(stacks[stackAt]);
-					item.getEntityItem().stackSize = 1;
-					GL11.glPushMatrix();
-					GL11.glScaled(64D, -64D, 1D);
-					GL11.glTranslated(((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.0625D-0.125D, 0.1D * (back ? 2 : -2));
-					if (!(stacks[stackAt].getItem() instanceof ItemBlock))
-					{
-						GL11.glScaled(0.75D, 0.75D, 0.75D);
-					}
-					else
-					{
-						//If it's a stupid glasspane
-						ItemBlock block = (ItemBlock)(stacks[stackAt].getItem());
-						if (block.getBlockID() == Block.thinGlass.blockID || block.getBlockID() == Block.hopperBlock.blockID)
-						{
-							GL11.glScaled(0.5D, 0.5D, 0.5D);
-						}
-					}
-					//Now, try to scale the item so that it perfectly fits the box
-					GL11.glScaled(ms/32D,ms/32D,1D);
-					if (sq == 1)
-					{
-						GL11.glTranslated(0D,-0.125D-(1/128D),0D);
-					}
-					else
-					{
-						GL11.glTranslated(0D,-0.125D+(1/(128D/(sq*2))),0D);
-					}
-					//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
-					RenderItem.renderInFrame = true;
-	                RenderManager.instance.renderEntityWithPosYaw(item, 0,0,0, 0.0F, 0.0F);
-	                RenderItem.renderInFrame = false;
-	                GL11.glPopMatrix();
-					GL11.glDisable(GL11.GL_TEXTURE_2D);
-					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glScaled(0.75D, 0.75D, 0.75D);
 				}
-				GL11.glColor4f(0.1F, 0.4F, 0.3F, 0.5F);
-				stackAt++;
+				else
+				{
+					//If it's a stupid glasspane
+					ItemBlock block = (ItemBlock)(stacks[stackAt].getItem());
+					if (block.getBlockID() == Block.thinGlass.blockID || block.getBlockID() == Block.hopperBlock.blockID)
+					{
+						GL11.glScaled(0.5D, 0.5D, 0.5D);
+					}
+				}
+				//Now, try to scale the item so that it perfectly fits the box
+				GL11.glScaled(ms/32D,ms/32D,1D);
+				if (sq == 1)
+				{
+					GL11.glTranslated(0D,-0.125D-(1/128D),0D);
+				}
+				else
+				{
+					GL11.glTranslated(0D,-0.125D+(1/(128D/(sq*2))),0D);
+				}
+				//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
+				RenderItem.renderInFrame = true;
+                RenderManager.instance.renderEntityWithPosYaw(item, 0,0,0, 0.0F, 0.0F);
+                RenderItem.renderInFrame = false;
+                GL11.glPopMatrix();
+				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				GL11.glEnable(GL11.GL_BLEND);
+				cx++;
+				if (cx>=sq)
+				{
+					cx = 0;
+					cy++;
+				}
 			}
+			GL11.glColor4f(0.1F, 0.4F, 0.3F, 0.5F);
 		}
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
