@@ -61,7 +61,7 @@ public class HoloInventoryInterface extends HoloGui {
 			drawString(font,"Items: "+numOfItems+"/"+tile.invInfo.size, 3, 32, 0xFFFFFF);
 			if (tile.fiveSecTickDowns % 2 == 0)
 			{
-				showItems(tile.invInfo.size,tile.invInfo.stacks,back);
+				showItems(numOfItems,tile.invInfo.stacks,back);
 			}
 		}
 		if (tile.driver != null && tile.driver.filter != null)
@@ -113,7 +113,7 @@ public class HoloInventoryInterface extends HoloGui {
 			for (int cy = 0; cy<sq; cy++)
 			{
 				//TODO: If slot is empty, go to the next slot
-				if (stackAt<size && stacks[stackAt] != null)
+				if (stackAt<stacks.length && stacks[stackAt] != null)
 				{
 					this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
 					GL11.glEnable(GL11.GL_TEXTURE_2D);

@@ -44,6 +44,7 @@ public class Controller {
 		{
 			System.out.println("Drivers dirty");
 			driverList.clear();
+			moveQueue.clear();
 			for (INetworkBase netbase : tile.net.tileMap.values())
 			{
 				if (netbase.getType() == EnumNBType.INTERFACE)
@@ -75,6 +76,7 @@ public class Controller {
 								{
 									//Add it onto the move queue
 									moveQueue.push(new StackInfo(driver, i));
+									System.out.println("Need to move "+stack.getItem().getUnlocalizedName());
 								}
 								else if (filter.matchesFilter(stack) && tile.worldObj != null)
 								{
@@ -91,7 +93,7 @@ public class Controller {
 			}
 		}
 		
-		//Process 64 items on the move queue
+		//Process 4 items on the move queue
 	}
 	
 	private class StackInfo

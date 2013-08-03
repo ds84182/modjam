@@ -63,6 +63,7 @@ public class PacketInventoryInterfaceState implements
 					e.printStackTrace();
 				}
 			}
+			state.filter = filter;
 		}
 		return state;
 	}

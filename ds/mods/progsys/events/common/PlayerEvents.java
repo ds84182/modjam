@@ -59,7 +59,14 @@ public class PlayerEvents {
 				else
 				{
 					//Hand has something.
-					
+					if (event.entityPlayer.worldObj.isRemote & tile.driver != null & tile.driver.filter != null)
+					{
+						tile.driver.filter.stacks.add(stack);
+						player.setCurrentItemOrArmor(0, null); //Ommnommnomm. I ate your item.
+						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+						player.swingItem();
+						event.setCanceled(true);
+					}
 				}
 			}
 		}
