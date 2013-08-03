@@ -30,16 +30,6 @@ public class HoloInventoryInterface extends HoloGui {
                 return false;
             }
 			
-			@Override
-            public byte getMiniBlockCount(ItemStack stack) {
-                return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 15) + 1);
-            }
-			
-            @Override
-            public byte getMiniItemCount(ItemStack stack) {
-                return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 7) + 1);
-            }
-			
 		};
 		render.setRenderManager(RenderManager.instance);
 	}
@@ -85,7 +75,14 @@ public class HoloInventoryInterface extends HoloGui {
 						GL11.glEnable(GL11.GL_TEXTURE_2D);
 						GL11.glDisable(GL11.GL_BLEND);
 						item.setEntityItemStack(tile.invInfo.stacks[stackAt]);
-						render.doRenderItem(item, 0,0,0,0,0);
+						GL11.glPushMatrix();
+						GL11.glScaled(64D, 64D, 64D);
+						GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
+						GL11.glTranslated((cx*(w+2))/64D, ((cy*-(h+2))/64D)-3D, 0);
+						//RenderItem.renderInFrame = true;
+		                RenderManager.instance.renderEntityWithPosYaw(item, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+		                //RenderItem.renderInFrame = false;
+		                GL11.glPopMatrix();
 						GL11.glDisable(GL11.GL_TEXTURE_2D);
 						GL11.glEnable(GL11.GL_BLEND);
 					}
