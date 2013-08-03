@@ -39,13 +39,13 @@ public class BlockWire extends Block {
 	}
 	
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4,
-			int par5, int par6) {
+	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3,
+			int par4, int par5) {
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
 		if (tile instanceof IOnRemove)
 		{
 			((IOnRemove)tile).onRemove();
 		}
-		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+		super.onBlockDestroyedByPlayer(par1World, par2, par3, par4, par5);
 	}
 }

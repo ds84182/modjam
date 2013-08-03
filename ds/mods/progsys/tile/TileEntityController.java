@@ -45,7 +45,10 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 		{
 			TileEntity tile = worldObj.getBlockTileEntity(xCoord+dir.offsetX, yCoord+dir.offsetY, zCoord+dir.offsetZ);
 			if (tile != null & tile instanceof TileEntityNetworkBase)
+			{
+				System.out.println("Adding "+dir);
 				arr.add((TileEntityNetworkBase) tile); dirs.add(dir);
+			}
 		}
 		
 		if (arr.size() == 1)
