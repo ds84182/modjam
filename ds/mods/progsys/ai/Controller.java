@@ -78,9 +78,10 @@ public class Controller {
 									moveQueue.push(new StackInfo(driver, i));
 									//System.out.println("Need to move "+stack.getItem().getUnlocalizedName());
 								}
-								else if (filter.matchesFilter(stack) && tile.worldObj != null)
+								else
 								{
-									//System.out.println(stack.getItem().getUnlocalizedName()+" ok!");
+									//If there is a more sutable place for the item, send it there.
+									//A place it sutable if this has a filter with no items in it and the other has a filter with that item in it and it's not on not mode
 								}
 							}
 						}
@@ -114,7 +115,7 @@ public class Controller {
 						ItemFilter filter = driver.getItemFilter();
 						if (filter != null)
 						{
-							if (!filter.not && filter.stacks.size() == 0)
+							if (filter.matchesFilter(info.driver.getStack(info.slot)))
 							{
 								//Move the item here
 								System.out.println("Found place");
