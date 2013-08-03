@@ -13,6 +13,7 @@ public class PacDispat {
 	{
 		packetTypes = new IPacket[]{
 				new PacketInventoryInfo(),
+				new PacketInventoryInterfaceState(),
 		};
 	}
 	
