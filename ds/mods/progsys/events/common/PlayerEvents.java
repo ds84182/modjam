@@ -8,6 +8,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.items.ItemWrench;
+import ds.mods.progsys.net.InventoryInterfaceState;
+import ds.mods.progsys.net.PacDispat;
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 
 public class PlayerEvents {
@@ -38,6 +40,7 @@ public class PlayerEvents {
 				else if (stack == null)
 				{
 					tile.showHolo = !tile.showHolo;
+					PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
 				}
 				else if (stack.getItem() instanceof ItemWrench)
 				{
