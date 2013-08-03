@@ -7,6 +7,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
+import ds.mods.progsys.items.ItemWrench;
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 
 public class PlayerEvents {
@@ -30,15 +31,19 @@ public class PlayerEvents {
 				 * Shift + Hand has wrench: Toggle NOT mode
 				 * Jump + Shift + Hand has wrench: Put wrench into filter
 				 */
-				if (stack == null)
+				if (stack == null && player.isSneaking())
+				{
+					
+				}
+				else if (stack == null)
 				{
 					tile.showHolo = !tile.showHolo;
 				}
-				else if (stack == null && player.isSneaking())
+				else if (stack.getItem() instanceof ItemWrench)
 				{
-					System.out.println("Not dead code :P");
+					player.worldObj.setBlockMetadataWithNotify(event.x, event.y, event.z, (player.worldObj.getBlockMetadata(event.x, event.y, event.z)+1)%6, 3);
 				}
-				event.setCanceled(true);
+				//event.setCanceled(true);
 			}
 		}
 	}
