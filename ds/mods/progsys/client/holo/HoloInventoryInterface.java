@@ -2,6 +2,8 @@ package ds.mods.progsys.client.holo;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.item.EntityItem;
 
 import org.lwjgl.opengl.GL11;
 
@@ -21,6 +23,7 @@ public class HoloInventoryInterface extends HoloGui {
 			}
 			
 		};
+		render.setRenderManager(RenderManager.instance);
 	}
 
 	@Override
@@ -72,6 +75,7 @@ public class HoloInventoryInterface extends HoloGui {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(0.1F, 0.4F, 0.3F, 0.5F);
 			int stackAt = 0;
+			EntityItem item = new EntityItem(Minecraft.getMinecraft().theWorld,0D,0D,0D);
 			for (int cx = 0; cx<sq; cx++)
 			{
 				for (int cy = 0; cy<sq; cy++)
@@ -81,7 +85,9 @@ public class HoloInventoryInterface extends HoloGui {
 					{
 						GL11.glEnable(GL11.GL_TEXTURE_2D);
 						//GL11.glDisable(GL11.GL_BLEND);
-						render.renderItemIntoGUI(font, Minecraft.getMinecraft().renderEngine, tile.invInfo.stacks[stackAt], cx*(w+2)+screenX, cy*(h+2)+screenY);
+						item.setEntityItemStack(tile.invInfo.stacks[stackAt]);
+						render.renderItemIntoGUI(font, Minecraft.getMinecraft().renderEngine, tile.invInfo.stacks[stackAt], cx*(w+2), cy*(h+2));
+						render.renderItemOverlayIntoGUI(font, Minecraft.getMinecraft().renderEngine, tile.invInfo.stacks[stackAt], cx*(w+2), cy*(h+2));
 						GL11.glDisable(GL11.GL_TEXTURE_2D);
 						GL11.glEnable(GL11.GL_BLEND);
 					}
