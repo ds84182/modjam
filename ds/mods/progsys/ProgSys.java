@@ -63,7 +63,7 @@ public class ProgSys {
 		iinterface.setUnlocalizedName("ds.progsys.invinterface");
 		GameRegistry.registerBlock(iinterface, "InventoryInterface");
 		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
-		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInventoryInterface");
+		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInvInterface");
 		
 		wrench = new ItemWrench(Config.WrenchID);
 		wrench.setUnlocalizedName("ds.progsys.wrench");

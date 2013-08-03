@@ -34,7 +34,7 @@ public class PacketHandler implements IPacketHandler {
 			if (tile != null)
 			{
 				//Extract state
-				System.out.println("Extracting state "+player);
+				//System.out.println("Extracting state "+player);
 				tile.showHolo = state.showHolo;
 				if (tile.driver != null)
 				{

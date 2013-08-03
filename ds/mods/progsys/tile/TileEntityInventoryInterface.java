@@ -85,7 +85,6 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		}
 		if (tickDown == 0)
 		{
-			sendState = true;
 			tickDown = 20;
 		}
 		if (sendState && !worldObj.isRemote)
@@ -189,6 +188,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		System.out.println("Loading NBT");
 		showHolo = nbt.getBoolean("showHolo");
 		if (driver == null || driver.filter == null)
 			createNetworkBase(net);
@@ -200,13 +200,14 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 			System.out.println(i);
 			driver.filter.stacks.add(ItemStack.loadItemStackFromNBT((NBTTagCompound) list.tagAt(i)));
 		}
-		//sendState = true;
+		sendState = true;
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setBoolean("showHolo", showHolo);
+		System.out.println("Saving "+nbt);
 		if (driver != null && driver.filter != null)
 		{
 			nbt.setBoolean("fltnot",driver.filter.not);
