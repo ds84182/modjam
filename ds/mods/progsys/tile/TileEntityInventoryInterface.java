@@ -104,6 +104,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 			{
 				fiveSecTickDown = 5;
 				fiveSecTickDowns++;
+				PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 			}
 		}
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
@@ -190,12 +191,15 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		super.readFromNBT(nbt);
 		System.out.println("Loading NBT");
 		showHolo = nbt.getBoolean("showHolo");
-		if (driver == null || driver.filter == null)
+		if (driver == null || driver.filter == null || net == null)
+		{
+			createDefaultNetwork();
 			createNetworkBase(net);
+		}
 		driver.filter.not = nbt.getBoolean("fltnot");
 		NBTTagList list = nbt.getTagList("fltstacks");
 		driver.filter.stacks.clear();
-		for (int i = 0; i<list.tagCount(); i++)
+		for (int i = 0; i<list.tagCount(); ++i)
 		{
 			System.out.println(i);
 			driver.filter.stacks.add(ItemStack.loadItemStackFromNBT((NBTTagCompound) list.tagAt(i)));
