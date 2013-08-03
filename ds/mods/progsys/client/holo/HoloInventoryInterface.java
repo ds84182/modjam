@@ -59,7 +59,7 @@ public class HoloInventoryInterface extends HoloGui {
 				if (tile.invInfo.stacks[i] != null) numOfItems++;
 			}
 			drawString(font,"Items: "+numOfItems+"/"+tile.invInfo.size, 3, 32, 0xFFFFFF);
-			int siz = tile.invInfo.size;
+			int siz = numOfItems;
 			double sq = Math.sqrt(siz);
 			while (Math.floor(sq) != sq)
 			{
@@ -77,6 +77,7 @@ public class HoloInventoryInterface extends HoloGui {
 			maxY -= (sq-1);
 			int w = (int) (maxX / sq);
 			int h = (int) (maxY / sq);
+			int ms = Math.max(w, h);
 			int screenX = 1;
 			int screenY = 65;
 			//System.out.println(w+","+h);
@@ -101,7 +102,7 @@ public class HoloInventoryInterface extends HoloGui {
 						GL11.glScaled(64D, -64D, 1D);
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
-		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.125D, 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
+		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.0625D-0.125D, 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
 		                RenderItem.renderInFrame = false;
 		                GL11.glPopMatrix();
 						GL11.glDisable(GL11.GL_TEXTURE_2D);

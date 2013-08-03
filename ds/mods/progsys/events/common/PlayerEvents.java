@@ -20,7 +20,7 @@ public class PlayerEvents {
 		if (event.action == Action.RIGHT_CLICK_BLOCK)
 		{
 			Block b = Block.blocksList[event.entityPlayer.worldObj.getBlockId(event.x, event.y, event.z)];
-			if (b instanceof BlockInventoryInterface && event.entityPlayer.worldObj.isRemote)
+			if (b instanceof BlockInventoryInterface)
 			{
 				EntityPlayer player = event.entityPlayer;
 				ItemStack stack = player.getHeldItem();
@@ -39,15 +39,21 @@ public class PlayerEvents {
 				}
 				else if (stack == null)
 				{
-					tile.showHolo = !tile.showHolo;
-					PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+					if (event.entityPlayer.worldObj.isRemote)
+					{
+						tile.showHolo = !tile.showHolo;
+						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+					}
 				}
 				else if (stack.getItem() instanceof ItemWrench)
 				{
-					player.worldObj.setBlockMetadataWithNotify(event.x, event.y, event.z, (player.worldObj.getBlockMetadata(event.x, event.y, event.z)+1)%6, 3);
-					player.swingItem();
+					if (!event.entityPlayer.worldObj.isRemote)
+					{
+						player.worldObj.setBlockMetadataWithNotify(event.x, event.y, event.z, (player.worldObj.getBlockMetadata(event.x, event.y, event.z)+1)%6, 3);
+						player.swingItem();
+						event.setCanceled(true);
+					}
 				}
-				//event.setCanceled(true);
 			}
 		}
 	}

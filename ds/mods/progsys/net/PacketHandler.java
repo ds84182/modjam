@@ -31,7 +31,7 @@ public class PacketHandler implements IPacketHandler {
 			EntityPlayer realPlayer = (EntityPlayer)player;
 			World w = realPlayer.worldObj;
 			TileEntityInventoryInterface tile = (TileEntityInventoryInterface) w.getBlockTileEntity(state.pos.x, state.pos.y, state.pos.z);
-			if (tile != null && !w.isRemote)
+			if (tile != null)
 			{
 				//Extract state
 				System.out.println("Extracting state "+state.showHolo+tile.tickDown);
