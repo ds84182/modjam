@@ -58,38 +58,40 @@ public class ItemDriver implements IDriver {
 	@Override
 	public boolean addItemStack(ItemStack stack)
 	{
+		return this.addItemStack(stack,-1);
+	}
+	
+	public boolean addItemStack(ItemStack stack,int not)
+	{
 		//Space check
 		for (int i = 0; i<this.getSize(); i++)
 		{
-			ItemStack item = this.getStack(i);
-			if (item == null)
+			if (i != not)
 			{
-				this.setStack(i, stack);
-				return true;
-			}
-			else if (item.areItemStackTagsEqual(item, stack) && item.isItemEqual(stack))
-			{
-				if (item.stackSize+stack.stackSize <= item.getMaxStackSize())
+				ItemStack item = this.getStack(i);
+				if (item == null)
 				{
-					item.stackSize+=stack.stackSize;
-					this.setStack(i, item);
+					this.setStack(i, stack);
 					return true;
 				}
-				else
+				else if (item.areItemStackTagsEqual(item, stack) && item.isItemEqual(stack))
 				{
-					ItemStack copy = stack.copy();
-					copy.splitStack(item.getMaxStackSize()-stack.stackSize);
-					int last = item.stackSize;
-					item.stackSize=item.getMaxStackSize();
-					this.setStack(i, item);
-					if (this.addItemStack(copy))
+					if (item.stackSize+stack.stackSize <= item.getMaxStackSize())
 					{
+						item.stackSize+=stack.stackSize;
+						this.setStack(i, item);
 						return true;
 					}
-					else
+					else if (item.stackSize < item.getMaxStackSize())
 					{
-						item.stackSize = last;
-						this.setStack(i, item);
+						ItemStack copy = stack.copy();
+						copy.stackSize = ((item.stackSize+stack.stackSize)-item.getMaxStackSize());
+						if (this.addItemStack(copy,i))
+						{
+							item.stackSize=item.getMaxStackSize();
+							this.setStack(i, item);
+							return true;
+						}
 					}
 				}
 			}

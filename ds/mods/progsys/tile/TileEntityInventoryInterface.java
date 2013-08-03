@@ -179,6 +179,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		NBTTagList list = nbt.getTagList("flt_stacks");
 		for (int i = 0; i<list.tagCount(); i++)
 		{
+			System.out.println(i);
 			driver.filter.stacks.add(ItemStack.loadItemStackFromNBT((NBTTagCompound) list.tagAt(i)));
 		}
 		sendState = true;
