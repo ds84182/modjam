@@ -33,6 +33,7 @@ public class PlayerEvents {
 				 * Shift + Hand has wrench: Toggle NOT mode
 				 * Jump + Shift + Hand has wrench: Put wrench into filter
 				 */
+				if (tile != null)
 				if (stack == null && player.isSneaking())
 				{
 					
@@ -59,7 +60,7 @@ public class PlayerEvents {
 				else
 				{
 					//Hand has something.
-					if (event.entityPlayer.worldObj.isRemote & tile.driver != null & tile.driver.filter != null)
+					if (event.entityPlayer.worldObj.isRemote && tile.driver != null && tile.driver.filter != null)
 					{
 						tile.driver.filter.stacks.add(stack);
 						player.setCurrentItemOrArmor(0, null); //Ommnommnomm. I ate your item.

@@ -40,6 +40,7 @@ public class ItemDriver implements IDriver {
 	@Override
 	public void setStack(int slot, ItemStack stack) {
 		inv.setInventorySlotContents(slot, stack);
+		inv.onInventoryChanged();
 	}
 
 	@Override

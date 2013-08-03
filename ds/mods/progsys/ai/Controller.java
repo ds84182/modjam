@@ -76,7 +76,7 @@ public class Controller {
 								{
 									//Add it onto the move queue
 									moveQueue.push(new StackInfo(driver, i));
-									System.out.println("Need to move "+stack.getItem().getUnlocalizedName());
+									//System.out.println("Need to move "+stack.getItem().getUnlocalizedName());
 								}
 								else if (filter.matchesFilter(stack) && tile.worldObj != null)
 								{
@@ -94,6 +94,41 @@ public class Controller {
 		}
 		
 		//Process 4 items on the move queue
+		for (int i = 0; i<4; i++)
+		{
+			if (!moveQueue.isEmpty())
+			{
+				//Find a place for the new item
+				/*
+				 * Priority:
+				 * First check for any filter with this item
+				 * Then check for any filter that is in not mode without this item
+				 * Then check for any filter that is not in not mode with no items
+				 */
+				StackInfo info = moveQueue.pop();
+				for (IDriver driver : driverList)
+				{
+					if (driver != null)
+					{
+						//For right now, we will only check for things without anything in the filter
+						ItemFilter filter = driver.getItemFilter();
+						if (filter != null)
+						{
+							if (!filter.not && filter.stacks.size() == 0)
+							{
+								//Move the item here
+								System.out.println("Found place");
+								driver.setStack(0,info.driver.getStackAndRemove(info.slot)); //TODO: Look to see if it has space
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				break;
+			}
+		}
 	}
 	
 	private class StackInfo
