@@ -43,6 +43,8 @@ public class PlayerEvents {
 					{
 						tile.showHolo = !tile.showHolo;
 						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+						player.swingItem();
+						event.setCanceled(true);
 					}
 				}
 				else if (stack.getItem() instanceof ItemWrench)

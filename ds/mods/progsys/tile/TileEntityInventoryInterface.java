@@ -26,6 +26,8 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public ItemDriver driver;
 	public int tickDown = 20;
 	public InventoryInfo invInfo;
+	public int fiveSecTickDown = 5;
+	public int fiveSecTickDowns = 0; //Now we can figure out the mode
 
 	@Override
 	public boolean canBeAddedToNetwork(Network net, ForgeDirection side) {

@@ -90,9 +90,9 @@ public class HoloInventoryInterface extends HoloGui {
 			{
 				for (int cy = 0; cy<sq; cy++)
 				{
-					this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
 					if (stackAt<tile.invInfo.stacks.length && tile.invInfo.stacks[stackAt] != null)
 					{
+						this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
 						GL11.glEnable(GL11.GL_TEXTURE_2D);
 						GL11.glDisable(GL11.GL_BLEND);
 						item.setEntityItemStack(tile.invInfo.stacks[stackAt]);
@@ -108,7 +108,7 @@ public class HoloInventoryInterface extends HoloGui {
 						{
 							//If it's a stupid glasspane
 							ItemBlock block = (ItemBlock)(tile.invInfo.stacks[stackAt].getItem());
-							if (block.getBlockID() == Block.thinGlass.blockID)
+							if (block.getBlockID() == Block.thinGlass.blockID || block.getBlockID() == Block.hopperBlock.blockID)
 							{
 								GL11.glScaled(0.5D, 0.5D, 0.5D);
 							}
@@ -116,9 +116,13 @@ public class HoloInventoryInterface extends HoloGui {
 						//Now, try to scale the item so that it perfectly fits the box
 						GL11.glScaled(ms/32D,ms/32D,1D);
 						if (sq == 1)
+						{
 							GL11.glTranslated(0D,-0.125D-(1/128D),0D);
+						}
 						else
-							GL11.glTranslated(0D, -0.125D-(sq/128D), 0D);
+						{
+							GL11.glTranslated(0D,-0.125D+(1/(128D/(sq*2))),0D);
+						}
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
 		                RenderManager.instance.renderEntityWithPosYaw(item, 0,0,0, 0.0F, 0.0F);
