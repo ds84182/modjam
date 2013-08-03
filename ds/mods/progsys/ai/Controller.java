@@ -16,7 +16,7 @@ public class Controller {
 	
 	private TileEntityController tile;
 	private Network net;
-	private ArrayList<IDriver> driverList = new ArrayList<IDriver>();
+	public ArrayList<IDriver> driverList = new ArrayList<IDriver>();
 	public boolean dirtyDrivers = true;
 	public Stack<StackInfo> moveQueue = new Stack<Controller.StackInfo>();
 	

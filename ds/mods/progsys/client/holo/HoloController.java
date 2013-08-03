@@ -40,10 +40,17 @@ public class HoloController extends HoloGui {
 			String str = tile.conflictMap.get(ForgeDirection.values()[i]);
 			if (str != null)
 			{
-				drawString(font,str+" on side "+ForgeDirection.values()[i].name(), 3, y+(i*10), 0xFF0000);
+				drawString(font,str+" on side "+ForgeDirection.values()[i].name(), 0, y+(i*10), 0xFF0000);
 				y+=8;
 			}
 		}
+		if (tile.controller.moveQueue.size() != 0)
+		{
+			drawString(font,"Moving "+tile.controller.moveQueue.size()+" items...",0,y,0xFFFFFF);
+			y+=8;
+		}
+		drawString(font,"Managing "+tile.controller.driverList.size()+" drivers...",0,y,0xFFFFFF);
+		y+=8;
 	}
 
 	@Override

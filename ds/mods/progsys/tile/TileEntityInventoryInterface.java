@@ -27,6 +27,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public ItemDriver driver;
 	public int tickDown = 20;
 	public InventoryInfo invInfo;
+	public boolean sendState = false;
 	public int fiveSecTickDown = 5;
 	public int fiveSecTickDowns = 0; //Now we can figure out the mode
 
@@ -81,6 +82,11 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 				this.showHolo = false;
 				PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 			}
+		}
+		if (sendState)
+		{
+			sendState = false;
+			PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 		}
 		if (worldObj.isRemote)
 		{
@@ -175,6 +181,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		{
 			driver.filter.stacks.add(ItemStack.loadItemStackFromNBT((NBTTagCompound) list.tagAt(i)));
 		}
+		sendState = true;
 	}
 
 	@Override

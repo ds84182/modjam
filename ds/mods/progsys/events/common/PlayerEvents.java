@@ -27,7 +27,7 @@ public class PlayerEvents {
 				TileEntityInventoryInterface tile = (TileEntityInventoryInterface) player.worldObj.getBlockTileEntity(event.x, event.y, event.z);
 				/*
 				 * Hand empty: Toggle holo
-				 * Shift + Hand Empty: Take last block out of filter
+				 * Shift + Hand Empty: //Take last block out of filter
 				 * Hand full: Add to filter
 				 * Hand has wrench: Go through sides
 				 * Shift + Hand has wrench: Toggle NOT mode
@@ -60,10 +60,9 @@ public class PlayerEvents {
 				else
 				{
 					//Hand has something.
-					if (event.entityPlayer.worldObj.isRemote && tile.driver != null && tile.driver.filter != null)
+					if (event.entityPlayer.worldObj.isRemote && tile.driver != null && tile.driver.filter != null && !event.entityPlayer.isSneaking())
 					{
 						tile.driver.filter.stacks.add(stack);
-						player.setCurrentItemOrArmor(0, null); //Ommnommnomm. I ate your item.
 						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
 						player.swingItem();
 						event.setCanceled(true);
