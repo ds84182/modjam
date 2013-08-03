@@ -39,8 +39,11 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 
 	@Override
 	public void createNetworkBase(Network net) {
-		driver = new ItemDriver(null);
-		netbase = new DriverNetworkBase(driver, new Vector3(xCoord,yCoord,zCoord));
+		if (driver == null && netbase == null)
+		{
+			driver = new ItemDriver(null);
+			netbase = new DriverNetworkBase(driver, new Vector3(xCoord,yCoord,zCoord));
+		}
 	}
 
 	@Override
@@ -193,7 +196,6 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		showHolo = nbt.getBoolean("showHolo");
 		if (driver == null || driver.filter == null || net == null)
 		{
-			createDefaultNetwork();
 			createNetworkBase(net);
 		}
 		driver.filter.not = nbt.getBoolean("fltnot");
