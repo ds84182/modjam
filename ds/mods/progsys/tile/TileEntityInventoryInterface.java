@@ -75,9 +75,14 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 			List l = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord-32, yCoord-32, zCoord-32, xCoord+32, yCoord+32, zCoord+32));
 			if (l.isEmpty())
 			{
+				System.out.println("NO players!");
 				this.showHolo = false;
+				PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 			}
-			PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
+			else
+			{
+				System.out.println(l);
+			}
 		}
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
 		{
@@ -107,7 +112,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	}
 
 	@Override
-	public void onPlace(EntityLivingBase entity, ItemStack stack) {
+	public void onPlace() {
 		//Check surroundings
 		ArrayList<TileEntityNetworkBase> arr = new ArrayList<TileEntityNetworkBase>();
 		ArrayList<ForgeDirection> dirs = new ArrayList<ForgeDirection>();

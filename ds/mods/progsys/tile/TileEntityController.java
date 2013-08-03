@@ -37,7 +37,7 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 	}
 
 	@Override
-	public void onPlace(EntityLivingBase entity, ItemStack stack) {
+	public void onPlace() {
 		//Check surroundings
 		ArrayList<TileEntityNetworkBase> arr = new ArrayList<TileEntityNetworkBase>();
 		ArrayList<ForgeDirection> dirs = new ArrayList<ForgeDirection>();

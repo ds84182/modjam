@@ -36,4 +36,13 @@ public abstract class TileEntityNetworkBase extends TileEntity {
 		super.invalidate();
 	}
 	
+	@Override
+	public void validate() {
+		if (this instanceof IOnPlace)
+		{
+			((IOnPlace)this).onPlace();
+		}
+		super.invalidate();
+	}
+	
 }

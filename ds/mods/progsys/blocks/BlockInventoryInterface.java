@@ -61,11 +61,7 @@ public class BlockInventoryInterface extends Block {
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-		if (tile instanceof IOnPlace)
-		{
-			((IOnPlace)tile).onPlace(par5EntityLivingBase, par6ItemStack);
-		}
+		//TODO: Directions
 	}
 
 	@Override

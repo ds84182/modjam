@@ -65,7 +65,7 @@ public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace, I
 
 	@Override
 	public void onRemove() {
-		net.remove(this); //TODO: Make Dora explore
+		net.remove(this); //TODO: Make Dora explore on all sides.
 	}
 
 }

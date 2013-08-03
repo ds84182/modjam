@@ -64,19 +64,22 @@ public class Controller {
 				{
 					//System.out.println("Itemdriver");
 					ItemFilter filter = driver.getItemFilter();
-					for (int i = 0; i<driver.getSize(); i++)
+					if (filter != null)
 					{
-						ItemStack stack = driver.getStack(i);
-						if (stack != null)
+						for (int i = 0; i<driver.getSize(); i++)
 						{
-							if (!filter.matchesFilter(stack) && !moveQueue.contains(new StackInfo(driver, i)))
+							ItemStack stack = driver.getStack(i);
+							if (stack != null)
 							{
-								//Add it onto the move queue
-								moveQueue.push(new StackInfo(driver, i));
-							}
-							else if (filter.matchesFilter(stack) && tile.worldObj != null)
-							{
-								//System.out.println(stack.getItem().getUnlocalizedName()+" ok!");
+								if (!filter.matchesFilter(stack) && !moveQueue.contains(new StackInfo(driver, i)))
+								{
+									//Add it onto the move queue
+									moveQueue.push(new StackInfo(driver, i));
+								}
+								else if (filter.matchesFilter(stack) && tile.worldObj != null)
+								{
+									//System.out.println(stack.getItem().getUnlocalizedName()+" ok!");
+								}
 							}
 						}
 					}

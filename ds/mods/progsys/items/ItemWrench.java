@@ -19,9 +19,4 @@ public class ItemWrench extends ItemPS {
 		this.itemIcon = par1IconRegister.registerIcon("progsys:wrench");
 	}
 
-	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.none; //TODO: Delete this
-	}
-
 }
