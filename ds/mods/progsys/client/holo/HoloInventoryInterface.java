@@ -4,11 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
-
-import com.google.common.primitives.SignedBytes;
 
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 
@@ -76,6 +75,7 @@ public class HoloInventoryInterface extends HoloGui {
 			maxY -= (sq-1);
 			int w = (int) (maxX / sq);
 			int h = (int) (maxY / sq);
+			int ts = Math.min(w, h);
 			int screenX = 1;
 			int screenY = 65;
 			//System.out.println(w+","+h);
@@ -89,15 +89,23 @@ public class HoloInventoryInterface extends HoloGui {
 			{
 				for (int cy = 0; cy<sq; cy++)
 				{
-					this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
 					if (stackAt<tile.invInfo.stacks.length && tile.invInfo.stacks[stackAt] != null)
 					{
+						this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
 						GL11.glEnable(GL11.GL_TEXTURE_2D);
 						GL11.glDisable(GL11.GL_BLEND);
-						item.setEntityItemStack(tile.invInfo.stacks[stackAt]);
+						ItemStack stack = tile.invInfo.stacks[stackAt];
+						item.setEntityItemStack(stack);
 						item.getEntityItem().stackSize = 1;
 						GL11.glPushMatrix();
-						GL11.glScaled(64D, -64D, 1D);
+						if (stack.getItem() instanceof ItemBlock)
+						{
+							GL11.glScaled(ts/(8/64D), -(ts), 1D);
+						}
+						else
+						{
+							GL11.glScaled(64D, -64D, 1D);
+						}
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
 		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.125D, 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
