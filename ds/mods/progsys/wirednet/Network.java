@@ -43,7 +43,8 @@ public class Network {
 	}
 
 	public void remove(TileEntityNetworkBase nb) {
-		tileMap.remove(nb.netbase.getPosition());
+		if (nb.netbase != null)
+			tileMap.remove(nb.netbase.getPosition());
 		if (sys != null)
 		{
 			sys.dirtyDrivers = true;
