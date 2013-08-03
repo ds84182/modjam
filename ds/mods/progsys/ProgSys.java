@@ -57,6 +57,9 @@ public class ProgSys {
 		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
 		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInventoryInterface");
 		
+		wrench = new ItemWrench(Config.WrenchID);
+		GameRegistry.registerItem(wrench, "Wrench");
+		
 		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
 		
 		proxy.registerRenderInfo();
