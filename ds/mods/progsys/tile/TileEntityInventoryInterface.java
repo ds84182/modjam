@@ -2,10 +2,14 @@ package ds.mods.progsys.tile;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import ds.mods.progsys.net.InventoryInfo;
 import ds.mods.progsys.net.PacDispat;
@@ -126,6 +130,12 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 			else
 				NetworkDiscovery.startAdventure(this); //Come on vamanos! Everybody lets go!
 		}
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox() {
+		return AxisAlignedBB.getAABBPool().getAABB(xCoord-1, yCoord, zCoord, xCoord + 2, yCoord + 5, zCoord + 1);
 	}
 
 }

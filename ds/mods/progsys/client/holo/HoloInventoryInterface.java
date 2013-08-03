@@ -66,6 +66,7 @@ public class HoloInventoryInterface extends HoloGui {
 				siz++;
 				sq = Math.sqrt(siz);
 			}
+			GL11.glPushMatrix();
 			//We will start item rendering at 64, the size of the gui is 3*64x3*64
 			//We need to find the size of the content that will leave a 2px space between elements and a 1px space between screen edges
 			int maxX = 3*64;
@@ -110,6 +111,7 @@ public class HoloInventoryInterface extends HoloGui {
 					stackAt++;
 				}
 			}
+			GL11.glPopMatrix();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glDisable(GL11.GL_BLEND);
 		}
