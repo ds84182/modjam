@@ -42,6 +42,7 @@ public class PlayerEvents {
 				else if (stack.getItem() instanceof ItemWrench)
 				{
 					player.worldObj.setBlockMetadataWithNotify(event.x, event.y, event.z, (player.worldObj.getBlockMetadata(event.x, event.y, event.z)+1)%6, 3);
+					player.swingItem();
 				}
 				//event.setCanceled(true);
 			}
