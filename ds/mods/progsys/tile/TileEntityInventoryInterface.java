@@ -1,17 +1,19 @@
 package ds.mods.progsys.tile;
 
 import java.util.ArrayList;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ds.mods.progsys.net.InventoryInfo;
+import ds.mods.progsys.net.InventoryInterfaceState;
 import ds.mods.progsys.net.PacDispat;
 import ds.mods.progsys.wirednet.Network;
 import ds.mods.progsys.wirednet.NetworkDiscovery;
@@ -69,6 +71,13 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 				tickDown = 20;
 				PacDispat.sendPacketToDimension(new InventoryInfo(driver.inv, new Vector3(xCoord,yCoord,zCoord)), worldObj.provider.dimensionId);
 			}
+			//Scan for any players within 32 blocks
+			List l = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord-32, yCoord-32, zCoord-32, xCoord+32, yCoord+32, zCoord+32));
+			if (l.isEmpty())
+			{
+				this.showHolo = false;
+			}
+			PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 		}
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
 		{

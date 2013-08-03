@@ -20,7 +20,7 @@ public class PlayerEvents {
 		if (event.action == Action.RIGHT_CLICK_BLOCK)
 		{
 			Block b = Block.blocksList[event.entityPlayer.worldObj.getBlockId(event.x, event.y, event.z)];
-			if (b instanceof BlockInventoryInterface)
+			if (b instanceof BlockInventoryInterface && event.entityPlayer.worldObj.isRemote)
 			{
 				EntityPlayer player = event.entityPlayer;
 				ItemStack stack = player.getHeldItem();

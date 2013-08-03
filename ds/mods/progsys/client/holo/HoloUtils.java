@@ -21,20 +21,20 @@ public class HoloUtils {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslated(-1D, 4.5D, 0.5001D);
+			GL11.glTranslated(-1D, 4.5D, 0.5002D);
 			GL11.glScalef(1/64F, -1/64F, 1/64F);
 			gui.drawBackground(false);
-			GL11.glTranslated(0D, 0D, 0.0001D);
+			GL11.glTranslated(0D, 0D, 0.0002D);
 			gui.draw(false);
 		}
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
 		{
 			//GL11.glRotatef(180F, 0F, 1F, 0F);
-			GL11.glTranslated(2D, 4.5D, 0.4999D);
+			GL11.glTranslated(2D, 4.5D, 0.4998D);
 			GL11.glScalef(-1/64F, -1/64F, 1/64F);
 			gui.drawBackground(true);
-			GL11.glTranslated(0D, 0D, -0.0001D);
+			GL11.glTranslated(0D, 0D, -0.0002D);
 			gui.draw(true);
 		}
 		GL11.glPopMatrix();
