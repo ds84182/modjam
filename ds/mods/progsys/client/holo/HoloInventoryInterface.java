@@ -1,14 +1,25 @@
 package ds.mods.progsys.client.holo;
 
+import net.minecraft.client.renderer.entity.RenderItem;
+
 import org.lwjgl.opengl.GL11;
 
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 
 public class HoloInventoryInterface extends HoloGui {
 	TileEntityInventoryInterface tile;
+	RenderItem render;
 	public HoloInventoryInterface(TileEntityInventoryInterface t)
 	{
 		tile = t;
+		render = new RenderItem(){
+
+			@Override
+			public boolean shouldBob() {
+				return false;
+			}
+			
+		};
 	}
 
 	@Override
