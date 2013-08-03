@@ -37,5 +37,20 @@ public class BlockWire extends Block {
 			((IOnPlace)tile).onPlace(par5EntityLivingBase, par6ItemStack);
 		}
 	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 	
 }

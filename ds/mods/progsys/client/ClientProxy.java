@@ -6,8 +6,10 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import ds.mods.progsys.CommonProxy;
 import ds.mods.progsys.client.render.TileEntityControllerRenderer;
 import ds.mods.progsys.client.render.TileEntityIInterfaceRenderer;
+import ds.mods.progsys.client.render.TileEntityWireRenderer;
 import ds.mods.progsys.tile.TileEntityController;
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
+import ds.mods.progsys.tile.TileEntityWire;
 
 public class ClientProxy extends CommonProxy {
 
@@ -17,6 +19,7 @@ public class ClientProxy extends CommonProxy {
 	{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityController.class, new TileEntityControllerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryInterface.class, new TileEntityIInterfaceRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWire.class, new TileEntityWireRenderer());
 	}
 	
 	public World getClientWorld()
