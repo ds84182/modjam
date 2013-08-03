@@ -1,5 +1,6 @@
 package ds.mods.progsys.client.holo;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 
 import org.lwjgl.opengl.GL11;
@@ -58,24 +59,38 @@ public class HoloInventoryInterface extends HoloGui {
 			//We need to find the size of the content that will leave a 2px space between elements and a 1px space between screen edges
 			int maxX = 3*64;
 			int maxY = (3*64)-64;
-			maxX--;
-			maxY--;
-			maxX -= (sq-2)*2;
-			maxY -= (sq-2)*2;
+			maxX-=2;
+			maxY-=2;
+			maxX -= (sq-1);
+			maxY -= (sq-1);
 			int w = (int) (maxX / sq);
 			int h = (int) (maxY / sq);
 			int screenX = 1;
 			int screenY = 65;
 			//System.out.println(w+","+h);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glColor4f(0.1F, 0.4F, 0.3F, 0.5F);
+			int stackAt = 0;
 			for (int cx = 0; cx<sq; cx++)
 			{
 				for (int cy = 0; cy<sq; cy++)
 				{
-					this.drawTexturedModalRect(cx*w, cy*h, 0, 0, w, h);
+					this.drawTexturedModalRect(cx*(w+2)+screenX, cy*(h+2)+screenY, 0, 0, w, h);
+					if (stackAt<tile.invInfo.stacks.length && tile.invInfo.stacks[stackAt] != null)
+					{
+						GL11.glEnable(GL11.GL_TEXTURE_2D);
+						//GL11.glDisable(GL11.GL_BLEND);
+						render.renderItemIntoGUI(font, Minecraft.getMinecraft().renderEngine, tile.invInfo.stacks[stackAt], cx*(w+2)+screenX, cy*(h+2)+screenY);
+						GL11.glDisable(GL11.GL_TEXTURE_2D);
+						GL11.glEnable(GL11.GL_BLEND);
+					}
+					GL11.glColor4f(0.1F, 0.4F, 0.3F, 0.5F);
+					stackAt++;
 				}
 			}
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glDisable(GL11.GL_BLEND);
 		}
 	}
 
