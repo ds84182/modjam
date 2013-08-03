@@ -74,4 +74,8 @@ public class PacDispat {
 		}
 		return packetTypes[type].readPacket(dat);
 	}
+
+	public static void sendPacketToServer(Object obj) {
+		PacketDispatcher.sendPacketToServer(createPacket(findPacketType(obj),packetTypes[findPacketType(obj)].writePacket(obj)));
+	}
 }
