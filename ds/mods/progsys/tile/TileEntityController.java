@@ -21,9 +21,10 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 
 	@Override
 	public boolean canBeAddedToNetwork(Network net, ForgeDirection side) {
-		if (net.controller == null)
+		if (net.controller == null || net.controller == controller)
 		{
 			System.out.println("adding");
+			net.remove(this);
 			return true;
 		}
 		System.out.println("Conflict");

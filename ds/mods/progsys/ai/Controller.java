@@ -118,7 +118,10 @@ public class Controller {
 							{
 								//Move the item here
 								System.out.println("Found place");
-								driver.setStack(0,info.driver.getStackAndRemove(info.slot)); //TODO: Look to see if it has space
+								if (driver.addItemStack(info.driver.getStackAndRemove(info.slot)))
+								{
+									break;
+								}
 							}
 						}
 					}

@@ -14,6 +14,7 @@ public interface IDriver {
 	public void setStack(int slot, ItemStack stack);
 	public ItemStack getStackAndRemove(int slot);
 	public ItemFilter getItemFilter();
+	public boolean addItemStack(ItemStack stack);
 	
 	//Fluid driver only
 	//TBH, I have never used the fluid system before.

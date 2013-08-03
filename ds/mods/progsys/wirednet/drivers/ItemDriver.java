@@ -54,6 +54,42 @@ public class ItemDriver implements IDriver {
 	public ItemFilter getItemFilter() {
 		return filter;
 	}
+	
+	@Override
+	public boolean addItemStack(ItemStack stack)
+	{
+		//Space check
+		for (int i = 0; i<this.getSize(); i++)
+		{
+			ItemStack item = this.getStack(i);
+			if (item == null)
+			{
+				this.setStack(i, stack);
+				return true;
+			}
+			else if (item.areItemStackTagsEqual(item, stack) && item.isItemEqual(stack))
+			{
+				if (item.stackSize+stack.stackSize <= item.getMaxStackSize())
+				{
+					item.stackSize+=stack.stackSize;
+					this.setStack(i, item);
+					return true;
+				}
+				else
+				{
+					ItemStack copy = stack.copy();
+					copy.splitStack(item.getMaxStackSize()-stack.stackSize);
+					if (this.addItemStack(copy))
+					{
+						item.stackSize=item.getMaxStackSize();
+						this.setStack(i, item);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public int getCapacity() {
