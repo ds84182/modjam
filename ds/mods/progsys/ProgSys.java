@@ -43,22 +43,27 @@ public class ProgSys {
 	public void init(FMLInitializationEvent event)
 	{
 		controller = new BlockController(Config.ControllerID, Material.rock);
+		controller.setUnlocalizedName("ds.progsys.controller");
 		GameRegistry.registerBlock(controller, "Controller");
 		LanguageRegistry.addName(controller, "ds.progsys.controller");
 		GameRegistry.registerTileEntity(TileEntityController.class, "teController");
 		
 		wire = new BlockWire(Config.WireID, Material.rock);
+		wire.setUnlocalizedName("ds.progsys.wire");
 		GameRegistry.registerBlock(wire, "Wire");
 		LanguageRegistry.addName(wire, "ds.progsys.wire");
 		GameRegistry.registerTileEntity(TileEntityWire.class, "teWire");
 		
 		iinterface = new BlockInventoryInterface(Config.ItemInterfacerID, Material.rock);
+		iinterface.setUnlocalizedName("ds.progsys.invinterface");
 		GameRegistry.registerBlock(iinterface, "InventoryInterface");
 		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
 		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInventoryInterface");
 		
 		wrench = new ItemWrench(Config.WrenchID);
+		wrench.setUnlocalizedName("ds.progsys.wrench");
 		GameRegistry.registerItem(wrench, "Wrench");
+		LanguageRegistry.addName(wrench, "ds.progsys.wrench");
 		
 		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
 		
