@@ -16,12 +16,12 @@ public class HoloController extends HoloGui {
 	}
 
 	@Override
-	public void drawBackground() {
+	public void drawBackground(boolean side) {
 		
 	}
 
 	@Override
-	public void draw() {
+	public void draw(boolean side) {
 		GL11.glPushMatrix();
 		GL11.glScalef(2F, 2F, 2F);
 		drawString(font,"Controller", 0, 0, 0xFFFFFF);

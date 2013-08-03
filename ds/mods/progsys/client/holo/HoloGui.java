@@ -12,8 +12,8 @@ public abstract class HoloGui extends Gui {
 		font = Minecraft.getMinecraft().fontRenderer;
 	}
 	
-	public abstract void drawBackground();
-	public abstract void draw();
+	public abstract void drawBackground(boolean back);
+	public abstract void draw(boolean back);
 	public abstract float[] getHoloColors();
 	
 	public void drawString(FontRenderer par1FontRenderer, String par2Str, int par3, int par4, int par5)

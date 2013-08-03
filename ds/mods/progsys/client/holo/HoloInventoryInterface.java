@@ -35,7 +35,7 @@ public class HoloInventoryInterface extends HoloGui {
 	}
 
 	@Override
-	public void drawBackground() {
+	public void drawBackground(boolean back) {
 		//We will render all the items at once, but firs we need to find a number that is square from the stack number
 		if (tile.invInfo != null)
 		{
@@ -44,7 +44,7 @@ public class HoloInventoryInterface extends HoloGui {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(boolean back) {
 		GL11.glPushMatrix();
 		GL11.glScalef(2F, 2F, 2F);
 		drawString(font,"Inventory", 0, 0, 0xFFFFFF);
@@ -97,10 +97,10 @@ public class HoloInventoryInterface extends HoloGui {
 						item.setEntityItemStack(tile.invInfo.stacks[stackAt]);
 						item.getEntityItem().stackSize = 1;
 						GL11.glPushMatrix();
-						GL11.glScaled(64D, -64D, 0.85D);
+						GL11.glScaled(64D, -64D, 1D);
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
-		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.125D, 0.00D, 0.0F, 0.0F);
+		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.125D, 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
 		                RenderItem.renderInFrame = false;
 		                GL11.glPopMatrix();
 						GL11.glDisable(GL11.GL_TEXTURE_2D);

@@ -23,9 +23,9 @@ public class HoloUtils {
 		{
 			GL11.glTranslated(-1D, 4.5D, 0.5001D);
 			GL11.glScalef(1/64F, -1/64F, 1/64F);
-			gui.drawBackground();
+			gui.drawBackground(false);
 			GL11.glTranslated(0D, 0D, 0.0001D);
-			gui.draw();
+			gui.draw(false);
 		}
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
@@ -33,9 +33,9 @@ public class HoloUtils {
 			//GL11.glRotatef(180F, 0F, 1F, 0F);
 			GL11.glTranslated(2D, 4.5D, 0.4999D);
 			GL11.glScalef(-1/64F, -1/64F, 1/64F);
-			gui.drawBackground();
+			gui.drawBackground(true);
 			GL11.glTranslated(0D, 0D, -0.0001D);
-			gui.draw();
+			gui.draw(true);
 		}
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_LIGHTING);
