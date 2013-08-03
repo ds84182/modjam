@@ -82,6 +82,31 @@ public class Controller {
 								{
 									//If there is a more sutable place for the item, send it there.
 									//A place it sutable if this has a filter with no items in it and the other has a filter with that item in it and it's not on not mode
+									boolean moved = false;
+									for (IDriver drv : driverList)
+									{
+										if (drv != null && drv != driver)
+										{
+											ItemFilter flt = drv.getItemFilter();
+											if (flt != null)
+											{
+												if (!flt.not && flt.stacks.size() > 0)
+												{
+													
+													for (ItemStack s : flt.stacks)
+													{
+														if (s.isItemEqual(stack))
+														{
+															moveQueue.push(new StackInfo(driver, i, drv));
+															moved = true;
+															break;
+														}
+													}
+												}
+											}
+										}
+										if (moved) break;
+									}
 								}
 							}
 						}
@@ -100,28 +125,36 @@ public class Controller {
 			if (!moveQueue.isEmpty())
 			{
 				//Find a place for the new item
-				/*
-				 * Priority:
-				 * First check for any filter with this item
-				 * Then check for any filter that is in not mode without this item
-				 * Then check for any filter that is not in not mode with no items
-				 */
 				StackInfo info = moveQueue.pop();
-				for (IDriver driver : driverList)
+				if (info.dest != null)
 				{
-					if (driver != null)
+					info.dest.addItemStack(info.driver.getStackAndRemove(info.slot));
+				}
+				else
+				{
+					/*
+					 * Priority:
+					 * First check for any filter with this item
+					 * Then check for any filter that is in not mode without this item
+					 * Then check for any filter that is not in not mode with no items
+					 */
+					//TODO: Priority
+					for (IDriver driver : driverList)
 					{
-						//For right now, we will only check for things without anything in the filter
-						ItemFilter filter = driver.getItemFilter();
-						if (filter != null)
+						if (driver != null)
 						{
-							if (filter.matchesFilter(info.driver.getStack(info.slot)))
+							//For right now, we will only check for things without anything in the filter
+							ItemFilter filter = driver.getItemFilter();
+							if (filter != null)
 							{
-								//Move the item here
-								System.out.println("Found place");
-								if (driver.addItemStack(info.driver.getStackAndRemove(info.slot)))
+								if (filter.matchesFilter(info.driver.getStack(info.slot)))
 								{
-									break;
+									//Move the item here
+									//System.out.println("Found place");
+									if (driver.addItemStack(info.driver.getStackAndRemove(info.slot)))
+									{
+										break;
+									}
 								}
 							}
 						}
@@ -139,10 +172,16 @@ public class Controller {
 	{
 		public IDriver driver;
 		public int slot;
+		public IDriver dest;
 		public StackInfo(IDriver d, int s)
 		{
 			driver = d;
 			slot = s;
+		}
+		public StackInfo(IDriver d, int s, IDriver dest)
+		{
+			this(d,s);
+			this.dest = dest;
 		}
 		@Override
 		public boolean equals(Object obj) {

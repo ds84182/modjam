@@ -78,12 +78,18 @@ public class ItemDriver implements IDriver {
 				else
 				{
 					ItemStack copy = stack.copy();
-					copy = copy.splitStack(item.getMaxStackSize()-stack.stackSize);
+					copy.splitStack(item.getMaxStackSize()-stack.stackSize);
+					int last = item.stackSize;
+					item.stackSize=item.getMaxStackSize();
+					this.setStack(i, item);
 					if (this.addItemStack(copy))
 					{
-						item.stackSize=item.getMaxStackSize();
-						this.setStack(i, item);
 						return true;
+					}
+					else
+					{
+						item.stackSize = last;
+						this.setStack(i, item);
 					}
 				}
 			}

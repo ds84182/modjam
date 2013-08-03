@@ -10,6 +10,8 @@ public class ItemFilter {
 	
 	public boolean matchesFilter(ItemStack stack)
 	{
+		if (stack == null)
+			return false;
 		if (!not & stacks.size() == 0)
 			return true;
 		if (not & stacks.size() != 0)
