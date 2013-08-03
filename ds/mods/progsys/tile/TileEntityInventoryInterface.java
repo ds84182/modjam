@@ -3,11 +3,11 @@ package ds.mods.progsys.tile;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
@@ -167,13 +167,29 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		
+		if (driver == null || driver.filter == null)
+			createNetworkBase(net);
+		driver.filter.not = nbt.getBoolean("flt_not");
+		NBTTagList list = nbt.getTagList("flt_stacks");
+		for (int i = 0; i<list.tagCount(); i++)
+		{
+			driver.filter.stacks.add(ItemStack.loadItemStackFromNBT((NBTTagCompound) list.tagAt(i)));
+		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		// TODO Auto-generated method stub
-		super.writeToNBT(par1nbtTagCompound);
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		if (driver != null && driver.filter != null)
+		{
+			nbt.setBoolean("flt_not",driver.filter.not);
+			NBTTagList list = new NBTTagList();
+			for (ItemStack stack : driver.filter.stacks)
+			{
+				list.appendTag(stack.writeToNBT(new NBTTagCompound()));
+			}
+			nbt.setTag("flt_stacks", list);
+		}
 	}
 
 }

@@ -26,21 +26,23 @@ public class HoloController extends HoloGui {
 		GL11.glScalef(2F, 2F, 2F);
 		drawString(font,"Controller", 0, 0, 0xFFFFFF);
 		GL11.glPopMatrix();
-		
+		int y = 16;
 		String status = "";
 		if (tile.net.tileMap.size() > 1)
 			status = "Controller is running...";
 		else
 			status = "Controller is offline...";
-		drawString(font,status, 3, 16, 0xFFFFFF);
+		drawString(font,status, 3, y, 0xFFFFFF);
+		y+=8;
 		
 		for (int i = 0; i<7; i++)
 		{
 			String str = tile.conflictMap.get(ForgeDirection.values()[i]);
-			if (str == null)
-				drawString(font,"No conflicts on side "+ForgeDirection.values()[i].name(), 3, 24+(i*10), 0xFFFFFF);
-			else
-				drawString(font,str+" on side "+ForgeDirection.values()[i].name(), 3, 24+(i*10), 0xFF0000);
+			if (str != null)
+			{
+				drawString(font,str+" on side "+ForgeDirection.values()[i].name(), 3, y+(i*10), 0xFF0000);
+				y+=8;
+			}
 		}
 	}
 
