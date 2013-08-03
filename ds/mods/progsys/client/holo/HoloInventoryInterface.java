@@ -98,17 +98,23 @@ public class HoloInventoryInterface extends HoloGui {
 						item.setEntityItemStack(stack);
 						item.getEntityItem().stackSize = 1;
 						GL11.glPushMatrix();
+						double scaleX = 0D;
+						double scaleY = 0D;
 						if (stack.getItem() instanceof ItemBlock)
 						{
-							GL11.glScaled(ts/(8/64D), -(ts), 1D);
+							scaleX = ts/(20/64D);
+							scaleY = -(ts/(20/64D));
+							System.out.println(scaleX+","+scaleY);
 						}
 						else
 						{
-							GL11.glScaled(64D, -64D, 1D);
+							scaleX = ts/(32/64D);
+							scaleY = -(ts/(32/64D));
 						}
+						GL11.glScaled(scaleX,scaleY,1D);
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
-		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.125D, 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
+		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/scaleX)+2.75D, ((cy*-(h+2))/-scaleY)-1.375D-(2.5D/scaleY), 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
 		                RenderItem.renderInFrame = false;
 		                GL11.glPopMatrix();
 						GL11.glDisable(GL11.GL_TEXTURE_2D);
