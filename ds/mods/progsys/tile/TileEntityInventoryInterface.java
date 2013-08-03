@@ -68,12 +68,11 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public void updateEntity()
 	{
 		super.updateEntity();
+		tickDown--;
 		if (this.showHolo && driver != null && driver.inv != null && !worldObj.isRemote)
 		{
-			tickDown--;
 			if (tickDown == 0)
 			{
-				tickDown = 20;
 				PacDispat.sendPacketToDimension(new InventoryInfo(driver.inv, new Vector3(xCoord,yCoord,zCoord)), worldObj.provider.dimensionId);
 			}
 			//Scan for any players within 32 blocks
@@ -83,6 +82,11 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 				this.showHolo = false;
 				PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 			}
+		}
+		if (tickDown == 0)
+		{
+			sendState = true;
+			tickDown = 20;
 		}
 		if (sendState && !worldObj.isRemote)
 		{
@@ -185,31 +189,33 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		showHolo = nbt.getBoolean("showHolo");
 		if (driver == null || driver.filter == null)
 			createNetworkBase(net);
-		driver.filter.not = nbt.getBoolean("flt_not");
-		NBTTagList list = nbt.getTagList("flt_stacks");
+		driver.filter.not = nbt.getBoolean("fltnot");
+		NBTTagList list = nbt.getTagList("fltstacks");
 		driver.filter.stacks.clear();
 		for (int i = 0; i<list.tagCount(); i++)
 		{
 			System.out.println(i);
 			driver.filter.stacks.add(ItemStack.loadItemStackFromNBT((NBTTagCompound) list.tagAt(i)));
 		}
-		sendState = true;
+		//sendState = true;
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
+		nbt.setBoolean("showHolo", showHolo);
 		if (driver != null && driver.filter != null)
 		{
-			nbt.setBoolean("flt_not",driver.filter.not);
+			nbt.setBoolean("fltnot",driver.filter.not);
 			NBTTagList list = new NBTTagList();
 			for (ItemStack stack : driver.filter.stacks)
 			{
 				list.appendTag(stack.writeToNBT(new NBTTagCompound()));
 			}
-			nbt.setTag("flt_stacks", list);
+			nbt.setTag("fltstacks", list);
 		}
 	}
 
