@@ -11,6 +11,8 @@ public class Config {
 	public static int ItemInterfacerID;
 	public static int FluidInterfacerID;
 	
+	public static int WrenchID;
+	
 	public static void loadConfig(File file)
 	{
 		Configuration cfg = new Configuration(file);
@@ -18,5 +20,7 @@ public class Config {
 		ControllerID = cfg.getBlock("Controller", 501, "The controller that controls those things, you know.").getInt();
 		ItemInterfacerID = cfg.getBlock("ItemInterfacer", 502, "The item interfacer interfaces with item... has a good looking interface.").getInt();
 		FluidInterfacerID = cfg.getBlock("FluidInterfacer", 503, "The fluid iterfacer lets you control your ingame fluid, not your IRL fluids. Just hold it in!").getInt();
+		
+		WrenchID = cfg.getItem("Wrench", 5000, "Use the wrench to configure stuff that can be wrenched.").getInt();
 	}
 }

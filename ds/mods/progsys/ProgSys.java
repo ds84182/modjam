@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import ds.mods.progsys.blocks.BlockController;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.blocks.BlockWire;
+import ds.mods.progsys.items.ItemWrench;
 import ds.mods.progsys.net.PacDispat;
 import ds.mods.progsys.net.PacketHandler;
 import ds.mods.progsys.tile.TileEntityController;
@@ -27,6 +28,7 @@ public class ProgSys {
 	public static BlockWire wire;
 	public static BlockInventoryInterface iinterface;
 	
+	public static ItemWrench wrench;
 	
 	@SidedProxy(serverSide = "ds.mods.progsys.CommonProxy",clientSide = "ds.mods.progsys.client.ClientProxy")
 	public static CommonProxy proxy;
@@ -55,7 +57,7 @@ public class ProgSys {
 		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
 		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInventoryInterface");
 		
-		LanguageRegistry.instance().loadLocalization("/assets/progsys/lang/en_US.lang", "en_US", false);
+		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
 		
 		proxy.registerRenderInfo();
 		PacDispat.initPacketStuff();
