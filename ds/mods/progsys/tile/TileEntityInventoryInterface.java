@@ -57,7 +57,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public void updateEntity()
 	{
 		super.updateEntity();
-		if (this.showHolo && driver.inv != null)
+		if (this.showHolo && driver.inv != null && !worldObj.isRemote)
 		{
 			tickDown--;
 			if (tickDown == 0)

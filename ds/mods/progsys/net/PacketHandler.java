@@ -20,7 +20,9 @@ public class PacketHandler implements IPacketHandler {
 			World w = ProgSys.proxy.getClientWorld();
 			TileEntityInventoryInterface tile = (TileEntityInventoryInterface) w.getBlockTileEntity(info.vec.x, info.vec.y, info.vec.z);
 			if (tile != null)
+			{
 				tile.invInfo = info;
+			}
 		}
 	}
 
