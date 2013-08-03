@@ -9,12 +9,17 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
+import ds.mods.progsys.wirednet.Vector3;
+
 public class PacketInventoryInfo implements IPacket<InventoryInfo> {
 
 	@Override
 	public byte[] writePacket(InventoryInfo obj) {
 		ByteArrayDataOutput out = ByteStreams.newDataOutput();
 		out.writeInt(obj.size);
+		out.writeInt(obj.vec.x);
+		out.writeInt(obj.vec.y);
+		out.writeInt(obj.vec.z);
 		for (ItemStack stack : obj.stacks)
 		{
 			try {
@@ -30,7 +35,7 @@ public class PacketInventoryInfo implements IPacket<InventoryInfo> {
 	public InventoryInfo readPacket(byte[] data) {
 		ByteArrayDataInput in = ByteStreams.newDataInput(data);
 		int size = in.readInt();
-		InventoryInfo info = new InventoryInfo(size);
+		InventoryInfo info = new InventoryInfo(size,new Vector3(in.readInt(),in.readInt(),in.readInt()));
 		for (int i=0; i<size; i++)
 		{
 			try {

@@ -23,15 +23,15 @@ public class HoloInventoryInterface extends HoloGui {
 		drawString(font,"Inventory", 0, 0, 0xFFFFFF);
 		drawString(font,"Interface", 0, 8, 0xFFFFFF);
 		GL11.glPopMatrix();
-		if (tile.driver.inv != null)
+		if (tile.invInfo != null)
 		{
 			int numOfItems = 0;
-			for (int i = 0; i<tile.driver.inv.getSizeInventory(); i++)
+			for (int i = 0; i<tile.invInfo.size; i++)
 			{
 				//tile.driver.inv.
-				if (tile.driver.inv.getStackInSlot(i) != null) numOfItems++;
+				if (tile.invInfo.stacks[i] != null) numOfItems++;
 			}
-			drawString(font,"Items: "+numOfItems+"/"+tile.driver.inv.getSizeInventory(), 3, 32, 0xFFFFFF);
+			drawString(font,"Items: "+numOfItems+"/"+tile.invInfo.size, 3, 32, 0xFFFFFF);
 		}
 	}
 

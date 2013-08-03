@@ -19,6 +19,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public ForgeDirection facing = ForgeDirection.DOWN;
 	public ItemDriver driver;
 	public int tickDown = 20;
+	public InventoryInfo invInfo;
 
 	@Override
 	public boolean canBeAddedToNetwork(Network net, ForgeDirection side) {
@@ -62,7 +63,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 			if (tickDown == 0)
 			{
 				tickDown = 20;
-				PacDispat.sendPacketToDimension(new InventoryInfo(driver.inv), worldObj.provider.dimensionId);
+				PacDispat.sendPacketToDimension(new InventoryInfo(driver.inv, new Vector3(xCoord,yCoord,zCoord)), worldObj.provider.dimensionId);
 			}
 		}
 		if (ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()] != facing)
