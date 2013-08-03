@@ -108,13 +108,14 @@ public class HoloInventoryInterface extends HoloGui {
 						}
 						else
 						{
-							scaleX = ts/(32/64D);
-							scaleY = -(ts/(32/64D));
+							scaleX = ts/(40/64D);
+							scaleY = -(ts/(40/64D));
 						}
+						GL11.glTranslated( ((cx*-(w+2))*scaleX)+(scaleX*1.375D), ((cy*-(h+2))*scaleY)+(scaleY*-0.25D), 0.1D * (back ? 2 : -2));
 						GL11.glScaled(scaleX,scaleY,1D);
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
-		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/scaleX)+2.75D, ((cy*-(h+2))/-scaleY)-1.375D-(2.5D/scaleY), 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
+		                RenderManager.instance.renderEntityWithPosYaw(item, 0,0,0, 0.0F, 0.0F);
 		                RenderItem.renderInFrame = false;
 		                GL11.glPopMatrix();
 						GL11.glDisable(GL11.GL_TEXTURE_2D);
