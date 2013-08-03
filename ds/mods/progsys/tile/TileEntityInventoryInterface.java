@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
@@ -83,7 +84,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 				PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 			}
 		}
-		if (sendState)
+		if (sendState && !worldObj.isRemote)
 		{
 			sendState = false;
 			PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
@@ -125,6 +126,12 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	}
 
 	@Override
+	public Packet getDescriptionPacket() {
+		this.sendState = true;
+		return null;
+	}
+
+	@Override
 	public void onRemove() {
 		net.remove(this);
 	}
@@ -142,7 +149,12 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		}
 		
 		if (arr.size() == 1)
-			arr.get(0).net.add(this,dirs.get(0));
+		{
+			if (arr.get(0).net != null)
+				arr.get(0).net.add(this,dirs.get(0));
+			else
+				NetworkDiscovery.startAdventure(this);
+		}
 		else if (arr.size() > 1)
 		{
 			//We have a more complex situation.
@@ -177,6 +189,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 			createNetworkBase(net);
 		driver.filter.not = nbt.getBoolean("flt_not");
 		NBTTagList list = nbt.getTagList("flt_stacks");
+		driver.filter.stacks.clear();
 		for (int i = 0; i<list.tagCount(); i++)
 		{
 			System.out.println(i);
