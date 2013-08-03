@@ -27,4 +27,13 @@ public abstract class TileEntityNetworkBase extends TileEntity {
 		if (net == null)
 			createDefaultNetwork();
 	}
+	@Override
+	public void invalidate() {
+		if (this instanceof IOnRemove)
+		{
+			((IOnRemove)this).onRemove();
+		}
+		super.invalidate();
+	}
+	
 }
