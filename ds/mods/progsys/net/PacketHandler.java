@@ -40,6 +40,7 @@ public class PacketHandler implements IPacketHandler {
 				{
 					tile.driver.filter = state.filter;
 				}
+				tile.worldObj.markBlockForUpdate(state.pos.x, state.pos.y, state.pos.z);
 			}
 			else
 			{

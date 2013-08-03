@@ -83,6 +83,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 			if (l.isEmpty())
 			{
 				this.showHolo = false;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 			}
 		}
@@ -93,6 +94,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		if (sendState && !worldObj.isRemote)
 		{
 			sendState = false;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			PacDispat.sendPacketToDimension(new InventoryInterfaceState(this), worldObj.provider.dimensionId);
 		}
 		if (worldObj.isRemote)
@@ -214,16 +216,13 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		super.writeToNBT(nbt);
 		nbt.setBoolean("showHolo", showHolo);
 		System.out.println("Saving "+nbt);
-		if (driver != null && driver.filter != null)
+		nbt.setBoolean("fltnot",driver.filter.not);
+		NBTTagList list = new NBTTagList();
+		for (ItemStack stack : driver.filter.stacks)
 		{
-			nbt.setBoolean("fltnot",driver.filter.not);
-			NBTTagList list = new NBTTagList();
-			for (ItemStack stack : driver.filter.stacks)
-			{
-				list.appendTag(stack.writeToNBT(new NBTTagCompound()));
-			}
-			nbt.setTag("fltstacks", list);
+			list.appendTag(stack.writeToNBT(new NBTTagCompound()));
 		}
+		nbt.setTag("fltstacks", list);
 	}
 
 }
