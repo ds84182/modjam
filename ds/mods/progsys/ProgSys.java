@@ -1,6 +1,9 @@
 package ds.mods.progsys;
 
+import java.util.logging.Level;
+
 import net.minecraft.block.material.Material;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -36,12 +39,14 @@ public class ProgSys {
 	@EventHandler
 	public void preinit(FMLPreInitializationEvent event)
 	{
+		FMLLog.info("Loading ProgSYS config...");
 		Config.loadConfig(event.getSuggestedConfigurationFile());
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		FMLLog.info("Loading ProgSYS...");
 		controller = new BlockController(Config.ControllerID, Material.rock);
 		controller.setUnlocalizedName("ds.progsys.controller");
 		GameRegistry.registerBlock(controller, "Controller");

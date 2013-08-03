@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
-public class ItemWrench extends Item {
+public class ItemWrench extends ItemPS {
 
 	public ItemWrench(int par1) {
 		super(par1);

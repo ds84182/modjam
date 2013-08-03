@@ -1,3 +1,4 @@
-ds.progsys.controller=Controller
-ds.progsys.wire=Wire
-ds.progsys.invinterface=Inventory Interface
+tile.ds.progsys.controller.name=Controller
+tile.ds.progsys.wire.name=Wire
+tile.ds.progsys.invinterface.name=Inventory Interface
+item.ds.progsys.wrench.name=Wrench

@@ -76,7 +76,7 @@ public class Controller {
 							}
 							else if (filter.matchesFilter(stack) && tile.worldObj != null)
 							{
-								System.out.println(stack.getItem().getUnlocalizedName()+" ok!");
+								//System.out.println(stack.getItem().getUnlocalizedName()+" ok!");
 							}
 						}
 					}
