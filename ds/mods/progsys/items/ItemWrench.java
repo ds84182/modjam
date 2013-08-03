@@ -21,7 +21,7 @@ public class ItemWrench extends ItemPS {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.block;
+		return EnumAction.none; //TODO: Delete this
 	}
 
 }
