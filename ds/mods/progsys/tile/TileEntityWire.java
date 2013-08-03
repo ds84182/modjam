@@ -24,7 +24,7 @@ public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace, I
 	}
 
 	@Override
-	public void onPlace(EntityLivingBase entity, ItemStack stack) {
+	public void onPlace() {
 		//Check surroundings
 		ArrayList<TileEntityNetworkBase> arr = new ArrayList<TileEntityNetworkBase>();
 		ArrayList<ForgeDirection> dirs = new ArrayList<ForgeDirection>();
@@ -51,7 +51,7 @@ public class TileEntityWire extends TileEntityNetworkBase implements IOnPlace, I
 					break;
 				}
 			}
-			if (netsame)
+			if (netsame && firstNet != null)
 				firstNet.add(this,dirs.get(0));
 			else
 				NetworkDiscovery.startAdventure(this); //Come on vamanos! Everybody lets go!

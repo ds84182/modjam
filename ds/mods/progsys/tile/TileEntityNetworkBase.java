@@ -15,6 +15,8 @@ public abstract class TileEntityNetworkBase extends TileEntity {
 	public INetworkBase netbase;
 	public EnumMap<ForgeDirection, String> conflictMap = new EnumMap<ForgeDirection, String>(ForgeDirection.class);
 	public boolean showHolo = false;
+	public boolean needsPlace = false;
+	public int tickNum = 0;
 	@SideOnly(Side.CLIENT)
 	public HoloGui gui;
 	
@@ -26,6 +28,13 @@ public abstract class TileEntityNetworkBase extends TileEntity {
 	{
 		if (net == null)
 			createDefaultNetwork();
+		tickNum++;
+		if (tickNum > 1) //First tick is dedicated to setting up networks
+			if (needsPlace)
+			{
+				((IOnPlace)this).onPlace();
+				needsPlace = !needsPlace;
+			}
 	}
 	@Override
 	public void invalidate() {
@@ -40,9 +49,9 @@ public abstract class TileEntityNetworkBase extends TileEntity {
 	public void validate() {
 		if (this instanceof IOnPlace)
 		{
-			((IOnPlace)this).onPlace();
+			needsPlace = true;
 		}
-		super.invalidate();
+		super.validate();
 	}
 	
 }

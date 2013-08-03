@@ -41,7 +41,6 @@ public class PacketInventoryInfo implements IPacket<InventoryInfo> {
 			try {
 				info.stacks[i] = Packet.readItemStack(in);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
