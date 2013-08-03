@@ -115,6 +115,10 @@ public class HoloInventoryInterface extends HoloGui {
 						}
 						//Now, try to scale the item so that it perfectly fits the box
 						GL11.glScaled(ms/32D,ms/32D,1D);
+						if (sq == 1)
+							GL11.glTranslated(0D,-0.125D-(1/128D),0D);
+						else
+							GL11.glTranslated(0D, -0.125D-(sq/128D), 0D);
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
 		                RenderManager.instance.renderEntityWithPosYaw(item, 0,0,0, 0.0F, 0.0F);
