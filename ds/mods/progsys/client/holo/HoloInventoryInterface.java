@@ -1,14 +1,13 @@
 package ds.mods.progsys.client.holo;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemBlock;
 
 import org.lwjgl.opengl.GL11;
-
-import com.google.common.primitives.SignedBytes;
 
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 
@@ -100,9 +99,23 @@ public class HoloInventoryInterface extends HoloGui {
 						item.getEntityItem().stackSize = 1;
 						GL11.glPushMatrix();
 						GL11.glScaled(64D, -64D, 1D);
+						GL11.glTranslated(((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.0625D-0.125D, 0.1D * (back ? 2 : -2));
+						if (!(tile.invInfo.stacks[stackAt].getItem() instanceof ItemBlock))
+						{
+							GL11.glScaled(0.75D, 0.75D, 0.75D);
+						}
+						else
+						{
+							//If it's a stupid glasspane
+							ItemBlock block = (ItemBlock)(tile.invInfo.stacks[stackAt].getItem());
+							if (block.getBlockID() == Block.thinGlass.blockID)
+							{
+								GL11.glScaled(0.5D, 0.5D, 0.5D);
+							}
+						}
 						//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 						RenderItem.renderInFrame = true;
-		                RenderManager.instance.renderEntityWithPosYaw(item, ((cx*-(w+2))/64D)-(w/128D)+3D, ((cy*-(h+2))/64D)-(h/128D)-1.0625D-0.125D, 0.1D * (back ? 2 : -2), 0.0F, 0.0F);
+		                RenderManager.instance.renderEntityWithPosYaw(item, 0,0,0, 0.0F, 0.0F);
 		                RenderItem.renderInFrame = false;
 		                GL11.glPopMatrix();
 						GL11.glDisable(GL11.GL_TEXTURE_2D);
