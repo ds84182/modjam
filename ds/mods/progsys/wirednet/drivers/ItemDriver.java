@@ -76,7 +76,7 @@ public class ItemDriver implements IDriver {
 				}
 				else if (item.areItemStackTagsEqual(item, stack) && item.isItemEqual(stack))
 				{
-					if (item.stackSize+stack.stackSize <= item.getMaxStackSize())
+					if (item.stackSize+stack.stackSize < item.getMaxStackSize())
 					{
 						item.stackSize+=stack.stackSize;
 						this.setStack(i, item);
