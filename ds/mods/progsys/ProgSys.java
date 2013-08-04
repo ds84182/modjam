@@ -1,6 +1,8 @@
 package ds.mods.progsys;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
@@ -111,6 +113,33 @@ public class ProgSys {
 			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos),
 			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos),
 			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos)
+		});
+		
+		GameRegistry.addShapedRecipe(new ItemStack(controller), new Object[]{
+			"HHH",
+			"PRP",
+			"RPR",
+			'H',new ItemStack(holos,2,1),
+			'P',new ItemStack(Block.pistonBase),
+			'R',new ItemStack(Block.blockRedstone)
+		});
+		
+		GameRegistry.addShapedRecipe(new ItemStack(iinterface), new Object[]{
+			"HHH",
+			"CRC",
+			"RPR",
+			'H',new ItemStack(holos,2,1),
+			'P',new ItemStack(Block.pistonBase),
+			'R',new ItemStack(Block.blockRedstone),
+			'C',new ItemStack(Block.chest)
+		});
+		
+		GameRegistry.addShapedRecipe(new ItemStack(wire,4), new Object[]{
+			"RRR",
+			"SSS",
+			"RRR",
+			'R',new ItemStack(Item.redstone),
+			'S',new ItemStack(Item.silk),
 		});
 		
 		proxy.registerRenderInfo();
