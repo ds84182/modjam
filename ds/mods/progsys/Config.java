@@ -13,6 +13,7 @@ public class Config {
 	public static int CrystalOreID;
 	
 	public static int WrenchID;
+	public static int CrystalID;
 	
 	public static void loadConfig(File file)
 	{
@@ -24,5 +25,6 @@ public class Config {
 		CrystalOreID = cfg.getBlock("CrystalOre", 504, "That beuatiful ore you see underground.").getInt();
 		
 		WrenchID = cfg.getItem("Wrench", 5000, "Use the wrench to configure stuff that can be wrenched.").getInt();
+		CrystalID = cfg.getItem("Crystal", 5001, "That awesome looking thing you get from thst awesome looking ore.").getInt();
 	}
 }

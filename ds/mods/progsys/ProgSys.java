@@ -16,6 +16,7 @@ import ds.mods.progsys.blocks.BlockCrystalOre;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.blocks.BlockWire;
 import ds.mods.progsys.events.common.PlayerEvents;
+import ds.mods.progsys.items.ItemCrystal;
 import ds.mods.progsys.items.ItemWrench;
 import ds.mods.progsys.net.PacDispat;
 import ds.mods.progsys.net.PacketHandler;
@@ -34,6 +35,7 @@ public class ProgSys {
 	public static BlockCrystalOre crystalOre;
 	
 	public static ItemWrench wrench;
+	public static ItemCrystal crystal;
 	
 	@SidedProxy(serverSide = "ds.mods.progsys.CommonProxy",clientSide = "ds.mods.progsys.client.ClientProxy")
 	public static CommonProxy proxy;
@@ -76,6 +78,11 @@ public class ProgSys {
 		wrench.setUnlocalizedName("ds.progsys.wrench");
 		GameRegistry.registerItem(wrench, "Wrench");
 		LanguageRegistry.addName(wrench, "ds.progsys.wrench");
+		
+		crystal = new ItemCrystal(Config.CrystalID);
+		crystal.setUnlocalizedName("ds.progsys.crystal");
+		GameRegistry.registerItem(crystal, "Crystal");
+		LanguageRegistry.addName(crystal, "ds.progsys.crystal");
 		
 		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
 		

@@ -1,4 +1,6 @@
 tile.ds.progsys.controller.name=Controller
 tile.ds.progsys.wire.name=Wire
 tile.ds.progsys.invinterface.name=Inventory Interface
+tile.ds.progsys.crystalore.name=Crystal Ore
 item.ds.progsys.wrench.name=Wrench
+item.ds.progsys.crystal.name=Crystal
