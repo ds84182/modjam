@@ -22,6 +22,7 @@ public class Controller {
 	public Stack<StackInfo> moveQueue = new Stack<Controller.StackInfo>();
 	public ArrayList<StackInfo> locks = new ArrayList<Controller.StackInfo>();
 	public HashMap<IDriver,ArrayList<ArrayList<IDriver>>> multiples = new HashMap<IDriver, ArrayList<ArrayList<IDriver>>>(); //Stores the multiples of driver stuff.
+	public ArrayList<ItemStack> optimized = new ArrayList<ItemStack>();
 	public int cooldown = 0; //Cooldown = stacksize/8
 	
 	public Controller(TileEntityController t)
@@ -66,7 +67,6 @@ public class Controller {
 				for (ItemStack stack : driver.getItemFilter().stacks)
 				{
 					ArrayList<IDriver> dupes = new ArrayList<IDriver>();
-					whereIsYourGodNow.add(dupes);
 					for (IDriver drv : driverList)
 					{
 						if (drv != driver)
@@ -81,6 +81,10 @@ public class Controller {
 									}
 								}
 						}
+					}
+					if (dupes.size() > 0)
+					{
+						whereIsYourGodNow.add(dupes);
 					}
 				}
 			}
@@ -113,30 +117,72 @@ public class Controller {
 								{
 									//If there is a more sutable place for the item, send it there.
 									//A place it sutable if this has a filter with no items in it and the other has a filter with that item in it and it's not on not mode
-									boolean moved = false;
-									for (IDriver drv : driverList)
+									//We also need to find if there is another place that requests this item. We will make an integer of how many of that single item is on the network
+									if (multiples.containsKey(driver))
 									{
-										if (drv != null && drv != driver)
+										//We look at how many of these we have.
+										boolean doesMatch = false;
+										for (ItemStack match : optimized)
 										{
-											ItemFilter flt = drv.getItemFilter();
-											if (flt != null)
+											if (match.isItemEqual(stack))
 											{
-												if (!flt.not && flt.stacks.size() > 0)
+												doesMatch = true;
+												break;
+											}
+										}
+										if (doesMatch)
+										{
+											//Find number of item in all inventories
+											int itemNum = 0;
+											for (IDriver drv : driverList)
+											{
+												if (drv != null)
 												{
-													
-													for (ItemStack s : flt.stacks)
-													{
-														if (s.isItemEqual(stack))
+													ItemFilter flt = drv.getItemFilter();
+													if (flt != null && flt.matchesFilter(stack))
+														for (int e = 0; e<drv.getSize(); e++)
 														{
-															moveQueue.push(new StackInfo(driver, i, drv));
-															moved = true;
-															break;
+															ItemStack stk = drv.getStack(e);
+															if (stk != null)
+															{
+																if (stk.isItemEqual(stack))
+																{
+																	itemNum+=stk.stackSize;
+																}
+															}
+														}
+												}
+											}
+											//Now, divide it between the dests!
+										}
+									}
+									else
+									{
+										boolean moved = false;
+										for (IDriver drv : driverList)
+										{
+											if (drv != null && drv != driver)
+											{
+												ItemFilter flt = drv.getItemFilter();
+												if (flt != null)
+												{
+													if (!flt.not && flt.stacks.size() > 0)
+													{
+														
+														for (ItemStack s : flt.stacks)
+														{
+															if (s.isItemEqual(stack))
+															{
+																moveQueue.push(new StackInfo(driver, i, drv));
+																moved = true;
+																break;
+															}
 														}
 													}
 												}
 											}
+											if (moved) break;
 										}
-										if (moved) break;
 									}
 								}
 							}
