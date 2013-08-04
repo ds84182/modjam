@@ -41,7 +41,7 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public void createNetworkBase(Network net) {
 		if (driver == null && netbase == null)
 		{
-			driver = new ItemDriver(null);
+			driver = new ItemDriver(null,this);
 			netbase = new DriverNetworkBase(driver, new Vector3(xCoord,yCoord,zCoord));
 		}
 	}

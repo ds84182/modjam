@@ -1,9 +1,11 @@
 package ds.mods.progsys.wirednet.drivers;
 
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import ds.mods.progsys.tile.TileEntityInventoryInterface;
 import ds.mods.progsys.wirednet.EnumDriverType;
 import ds.mods.progsys.wirednet.IDriver;
 import ds.mods.progsys.wirednet.ItemFilter;
@@ -11,10 +13,12 @@ import ds.mods.progsys.wirednet.ItemFilter;
 public class ItemDriver implements IDriver {
 	public IInventory inv;
 	public ItemFilter filter = new ItemFilter();
+	public TileEntityInventoryInterface tile;
 	
-	public ItemDriver(IInventory i)
+	public ItemDriver(IInventory i, TileEntityInventoryInterface t)
 	{
 		inv = i;
+		tile = t;
 	}
 
 	@Override
@@ -29,6 +33,11 @@ public class ItemDriver implements IDriver {
 
 	@Override
 	public int getSize() {
+		if (inv != null && inv instanceof ISidedInventory)
+		{
+			ISidedInventory sided = (ISidedInventory) inv;
+			return sided.getAccessibleSlotsFromSide(tile.facing.getOpposite().ordinal()).length;
+		}
 		return inv != null ? inv.getSizeInventory() : 0;
 	}
 
