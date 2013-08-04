@@ -2,6 +2,7 @@ package ds.mods.progsys;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,6 +15,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ds.mods.progsys.blocks.BlockController;
 import ds.mods.progsys.blocks.BlockCrystalOre;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
@@ -42,6 +45,9 @@ public class ProgSys {
 	public static ItemWrench wrench;
 	public static ItemCrystal crystal;
 	public static ItemHolos holos;
+	
+	@SideOnly(Side.CLIENT)
+	public static CreativeTabs tab = new CreativeTabs("ProgSys");
 	
 	@SidedProxy(serverSide = "ds.mods.progsys.CommonProxy",clientSide = "ds.mods.progsys.client.ClientProxy")
 	public static CommonProxy proxy;

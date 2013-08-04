@@ -1,5 +1,6 @@
 package ds.mods.progsys.blocks;
 
+import ds.mods.progsys.ProgSys;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -9,6 +10,7 @@ public class BlockPS extends Block {
 		super(par1, par2Material);
 		this.setHardness(2F);
 		this.setResistance(0.5F);
+		this.setCreativeTab(ProgSys.tab);
 	}
 
 }

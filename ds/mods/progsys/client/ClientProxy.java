@@ -6,6 +6,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import ds.mods.progsys.CommonProxy;
 import ds.mods.progsys.Config;
+import ds.mods.progsys.ProgSys;
 import ds.mods.progsys.client.render.CrystalItemRenderer;
 import ds.mods.progsys.client.render.TileEntityControllerRenderer;
 import ds.mods.progsys.client.render.TileEntityIInterfaceRenderer;
