@@ -76,7 +76,7 @@ public class ItemDriver implements IDriver {
 				}
 				else if (item.areItemStackTagsEqual(item, stack) && item.isItemEqual(stack))
 				{
-					if (item.stackSize+stack.stackSize < item.getMaxStackSize())
+					if (item.stackSize+stack.stackSize <= item.getMaxStackSize())
 					{
 						item.stackSize+=stack.stackSize;
 						this.setStack(i, item);
@@ -86,12 +86,13 @@ public class ItemDriver implements IDriver {
 					{
 						ItemStack copy = stack.copy();
 						copy.stackSize = ((item.stackSize+stack.stackSize)-item.getMaxStackSize());
-						if (this.addItemStack(copy,i))
-						{
-							item.stackSize=item.getMaxStackSize();
-							this.setStack(i, item);
-							return true;
-						}
+						if (copy.stackSize != 0)
+							if (this.addItemStack(copy,i))
+							{
+								item.stackSize=item.getMaxStackSize();
+								this.setStack(i, item);
+								return true;
+							}
 					}
 				}
 			}

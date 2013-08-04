@@ -52,10 +52,13 @@ public class PlayerEvents {
 				{
 					if (event.entityPlayer.worldObj.isRemote)
 					{
-						tile.driver.filter.not = !tile.driver.filter.not;
-						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
-						player.swingItem();
-						event.setCanceled(true);
+						if (tile.driver != null && tile.driver.filter != null)
+						{
+							tile.driver.filter.not = !tile.driver.filter.not;
+							PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+							player.swingItem();
+							event.setCanceled(true);
+						}
 					}
 				}
 				else if (stack.getItem() instanceof ItemWrench)

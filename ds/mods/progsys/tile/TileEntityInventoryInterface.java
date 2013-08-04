@@ -116,13 +116,8 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 		{
 			facing = ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()];
 			//Dir changed!
-			if (inventoryExists())
-			{
-				if (netbase != null)
-				{
-					driver.inv = getInventory();
-				}
-			}
+			onRemove();
+			onPlace();
 		}
 		else
 		{
