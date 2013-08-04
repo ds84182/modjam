@@ -1,6 +1,7 @@
 package ds.mods.progsys;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -15,6 +16,7 @@ import ds.mods.progsys.blocks.BlockController;
 import ds.mods.progsys.blocks.BlockCrystalOre;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.blocks.BlockWire;
+import ds.mods.progsys.client.holo.ItemHolos;
 import ds.mods.progsys.events.common.PlayerEvents;
 import ds.mods.progsys.items.ItemCrystal;
 import ds.mods.progsys.items.ItemWrench;
@@ -37,6 +39,7 @@ public class ProgSys {
 	
 	public static ItemWrench wrench;
 	public static ItemCrystal crystal;
+	public static ItemHolos holos;
 	
 	@SidedProxy(serverSide = "ds.mods.progsys.CommonProxy",clientSide = "ds.mods.progsys.client.ClientProxy")
 	public static CommonProxy proxy;
@@ -85,11 +88,30 @@ public class ProgSys {
 		GameRegistry.registerItem(crystal, "Crystal");
 		LanguageRegistry.addName(crystal, "ds.progsys.crystal");
 		
+		holos = new ItemHolos(Config.HolosID);
+		holos.setUnlocalizedName("ds.progsys.holos");
+		GameRegistry.registerItem(holos, "Holos");
+		LanguageRegistry.addName("item.ds.progsys.holos.pixel.name", "ds.progsys.holopixel");
+		LanguageRegistry.addName("item.ds.progsys.holos.array.name", "ds.progsys.holoarray");
+		
 		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
 		
 		MinecraftForge.EVENT_BUS.register(new PlayerEvents());
 		
 		GameRegistry.registerWorldGenerator(new CrystalGenerator());
+		
+		//CRAFTING!
+		GameRegistry.addShapelessRecipe(new ItemStack(holos), new Object[]{
+			new ItemStack(crystal),new ItemStack(crystal),new ItemStack(crystal),
+			new ItemStack(crystal),new ItemStack(crystal),new ItemStack(crystal),
+			new ItemStack(crystal),new ItemStack(crystal),new ItemStack(crystal)
+		});
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(holos,1,1), new Object[]{
+			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos),
+			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos),
+			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos)
+		});
 		
 		proxy.registerRenderInfo();
 		PacDispat.initPacketStuff();

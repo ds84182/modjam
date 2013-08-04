@@ -14,6 +14,7 @@ public class Config {
 	
 	public static int WrenchID;
 	public static int CrystalID;
+	public static int HolosID;
 	
 	public static void loadConfig(File file)
 	{
@@ -26,5 +27,6 @@ public class Config {
 		
 		WrenchID = cfg.getItem("Wrench", 5000, "Use the wrench to configure stuff that can be wrenched.").getInt();
 		CrystalID = cfg.getItem("Crystal", 5001, "That awesome looking thing you get from thst awesome looking ore.").getInt();
+		HolosID = cfg.getItem("Holos", 5002, "Those filler items to make crafting a little harder").getInt();
 	}
 }
