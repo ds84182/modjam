@@ -210,14 +210,17 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setBoolean("showHolo", showHolo);
-		System.out.println("Saving "+nbt);
-		nbt.setBoolean("fltnot",driver.filter.not);
-		NBTTagList list = new NBTTagList();
-		for (ItemStack stack : driver.filter.stacks)
+		System.out.println("Saving "+nbt); 
+		if (driver != null && driver.filter != null)
 		{
-			list.appendTag(stack.writeToNBT(new NBTTagCompound()));
+			nbt.setBoolean("fltnot",driver.filter.not);
+			NBTTagList list = new NBTTagList();
+			for (ItemStack stack : driver.filter.stacks)
+			{
+				list.appendTag(stack.writeToNBT(new NBTTagCompound()));
+			}
+			nbt.setTag("fltstacks", list);
 		}
-		nbt.setTag("fltstacks", list);
 	}
 
 }
