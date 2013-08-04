@@ -131,9 +131,13 @@ public class Controller {
 					StackInfo info = moveQueue.pop();
 					if (info.dest != null)
 					{
-						ItemStack item = info.driver.getStackAndRemove(info.slot);
-						cooldown += item.stackSize/8;
-						info.dest.addItemStack(item);
+						ItemStack item = info.driver.getStack(info.slot);
+						if (item != null)
+						{
+							cooldown += item.stackSize/8;
+							info.dest.addItemStack(item);
+							info.driver.setStack(info.slot, null);
+						}
 					}
 					else
 					{
@@ -156,10 +160,11 @@ public class Controller {
 									{
 										//Move the item here
 										//System.out.println("Found place");
-										ItemStack item = info.driver.getStackAndRemove(info.slot);
+										ItemStack item = info.driver.getStack(info.slot);
 										if (driver.addItemStack(item))
 										{
 											cooldown += item.stackSize/8;
+											info.driver.setStack(info.slot, null);
 											break;
 										}
 										else
