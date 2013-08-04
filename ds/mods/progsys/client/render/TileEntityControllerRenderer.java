@@ -22,16 +22,6 @@ public class TileEntityControllerRenderer extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,
 			double d2, float f) {
 		TileEntityController tile = (TileEntityController) tileentity;
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glPushMatrix();
-		{
-			GL11.glTranslated(d0+0.5D, d1+0.5D, d2+1D);
-			GL11.glRotated(180D, 0.132113D, 0.4123D, 0.5931D);
-			GL11.glColor3f(0F, 0.64F, 0.022558F);
-			model.render();
-		}
-		GL11.glPopMatrix();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		if (tile.showHolo)
 		{
 			GL11.glPushMatrix();

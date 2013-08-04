@@ -15,7 +15,7 @@ import ds.mods.progsys.tile.IOnPlace;
 import ds.mods.progsys.tile.IOnRemove;
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 
-public class BlockInventoryInterface extends Block {
+public class BlockInventoryInterface extends BlockPS {
 	@SideOnly(Side.CLIENT)
 	public Icon socket;
 

@@ -15,7 +15,7 @@ import ds.mods.progsys.tile.IOnPlace;
 import ds.mods.progsys.tile.IOnRemove;
 import ds.mods.progsys.tile.TileEntityController;
 
-public class BlockController extends Block {
+public class BlockController extends BlockPS {
 	@SideOnly(Side.CLIENT)
 	public Icon blank;
 

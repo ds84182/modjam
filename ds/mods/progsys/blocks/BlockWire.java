@@ -10,7 +10,7 @@ import ds.mods.progsys.tile.IOnPlace;
 import ds.mods.progsys.tile.IOnRemove;
 import ds.mods.progsys.tile.TileEntityWire;
 
-public class BlockWire extends Block {
+public class BlockWire extends BlockPS {
 
 	public BlockWire(int par1, Material par2Material) {
 		super(par1, par2Material);

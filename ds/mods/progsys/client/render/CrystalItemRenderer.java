@@ -25,13 +25,13 @@ public class CrystalItemRenderer implements IItemRenderer {
 		switch(type)
 		{
 		case ENTITY:
-			render(0.5D,0.5D,2D);
+			render(0D,0.5D,1.5D);
 			break;
 		case EQUIPPED:
-			render(0,0,0);
+			render(0.5D,0.5D,2D);
 			break;
 		case EQUIPPED_FIRST_PERSON:
-			render(0,0,0);
+			render(0.5D,0.5D,2D);
 			break;
 		case FIRST_PERSON_MAP:
 			break;
