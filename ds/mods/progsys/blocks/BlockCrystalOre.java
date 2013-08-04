@@ -1,8 +1,11 @@
 package ds.mods.progsys.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ds.mods.progsys.ProgSys;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 
 public class BlockCrystalOre extends Block {
 
@@ -11,18 +14,9 @@ public class BlockCrystalOre extends Block {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
-	public int getRenderType() {
-		return ProgSys.proxy.CrystalRenderID;
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return true;
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("progsys:crystalOre");
 	}
 
 }
