@@ -19,6 +19,7 @@ public class Controller {
 	public ArrayList<IDriver> driverList = new ArrayList<IDriver>();
 	public boolean dirtyDrivers = true;
 	public Stack<StackInfo> moveQueue = new Stack<Controller.StackInfo>();
+	public int cooldown = 0; //Cooldown = stacksize/8
 	
 	public Controller(TileEntityController t)
 	{
@@ -119,52 +120,67 @@ public class Controller {
 			}
 		}
 		
-		//Process 4 items on the move queue
-		for (int i = 0; i<4; i++)
+		if (cooldown < 1)
 		{
-			if (!moveQueue.isEmpty())
+			//Process 4 items on the move queue
+			for (int i = 0; i<4; i++)
 			{
-				//Find a place for the new item
-				StackInfo info = moveQueue.pop();
-				if (info.dest != null)
+				if (!moveQueue.isEmpty())
 				{
-					info.dest.addItemStack(info.driver.getStackAndRemove(info.slot));
-				}
-				else
-				{
-					/*
-					 * Priority:
-					 * First check for any filter with this item
-					 * Then check for any filter that is in not mode without this item
-					 * Then check for any filter that is not in not mode with no items
-					 */
-					//TODO: Priority
-					for (IDriver driver : driverList)
+					//Find a place for the new item
+					StackInfo info = moveQueue.pop();
+					if (info.dest != null)
 					{
-						if (driver != null)
+						ItemStack item = info.driver.getStackAndRemove(info.slot);
+						cooldown += item.stackSize/8;
+						info.dest.addItemStack(item);
+					}
+					else
+					{
+						/*
+						 * Priority:
+						 * First check for any filter with this item
+						 * Then check for any filter that is in not mode without this item
+						 * Then check for any filter that is not in not mode with no items
+						 */
+						//TODO: Priority
+						for (IDriver driver : driverList)
 						{
-							//For right now, we will only check for things without anything in the filter
-							ItemFilter filter = driver.getItemFilter();
-							if (filter != null)
+							if (driver != null)
 							{
-								if (filter.matchesFilter(info.driver.getStack(info.slot)))
+								//For right now, we will only check for things without anything in the filter
+								ItemFilter filter = driver.getItemFilter();
+								if (filter != null)
 								{
-									//Move the item here
-									//System.out.println("Found place");
-									if (driver.addItemStack(info.driver.getStackAndRemove(info.slot)))
+									if (filter.matchesFilter(info.driver.getStack(info.slot)))
 									{
-										break;
+										//Move the item here
+										//System.out.println("Found place");
+										ItemStack item = info.driver.getStackAndRemove(info.slot);
+										if (driver.addItemStack(item))
+										{
+											cooldown += item.stackSize/8;
+											break;
+										}
+										else
+										{
+											info.driver.setStack(info.slot, item);
+										}
 									}
 								}
 							}
 						}
 					}
 				}
+				else
+				{
+					break;
+				}
 			}
-			else
-			{
-				break;
-			}
+		}
+		else
+		{
+			cooldown--;
 		}
 	}
 	

@@ -32,7 +32,7 @@ public class HoloController extends HoloGui {
 			status = "Controller is running...";
 		else
 			status = "Controller is offline...";
-		drawString(font,status, 3, y, 0xFFFFFF);
+		drawString(font,status, 8, y, 0xFFFFFF);
 		y+=8;
 		
 		for (int i = 0; i<7; i++)
@@ -40,16 +40,16 @@ public class HoloController extends HoloGui {
 			String str = tile.conflictMap.get(ForgeDirection.values()[i]);
 			if (str != null)
 			{
-				drawString(font,str+" on side "+ForgeDirection.values()[i].name(), 0, y+(i*10), 0xFF0000);
-				y+=8;
+				//drawString(font,str+" on side "+ForgeDirection.values()[i].name(), 8, y+(i*10), 0xFF0000);
+				//y+=8;
 			}
 		}
 		if (tile.controller.moveQueue.size() != 0)
 		{
-			drawString(font,"Moving "+tile.controller.moveQueue.size()+" items...",0,y,0xFFFFFF);
+			drawString(font,"Moving "+tile.controller.moveQueue.size()+" items...",8,y,0xFFFFFF);
 			y+=8;
 		}
-		drawString(font,"Managing "+tile.controller.driverList.size()+" drivers...",0,y,0xFFFFFF);
+		drawString(font,"Managing "+tile.controller.driverList.size()+" drivers...",8,y,0xFFFFFF);
 		y+=8;
 	}
 

@@ -58,15 +58,16 @@ public class HoloInventoryInterface extends HoloGui {
 				//tile.driver.inv.
 				if (tile.invInfo.stacks[i] != null) numOfItems++;
 			}
-			drawString(font,"Items: "+numOfItems+"/"+tile.invInfo.size, 3, 32, 0xFFFFFF);
+			drawString(font,"Items: "+numOfItems+"/"+tile.invInfo.size, 8, 32, 0xFFFFFF);
 			if (tile.fiveSecTickDowns % 2 == 0)
 			{
 				showItems(numOfItems,tile.invInfo.stacks,back);
 			}
+			drawString(font,"View: "+(tile.fiveSecTickDowns % 2 == 0 ? "Inventory" : "Filter"),8,48,0xFFFFFF);
 		}
 		if (tile.driver != null && tile.driver.filter != null)
 		{
-			drawString(font,"Filter Mode: "+(tile.driver.filter.not ? "Not" : "Normal"), 3, 40, 0xFFFFFF);
+			drawString(font,"Filter Mode: "+(tile.driver.filter.not ? "Not" : "Normal"), 8, 40, 0xFFFFFF);
 			if (tile.fiveSecTickDowns % 2 == 1)
 			{
 				showItems(tile.driver.filter.stacks.size(),tile.driver.filter.stacks.toArray(new ItemStack[0]),back);

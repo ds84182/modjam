@@ -16,7 +16,7 @@ public class TileEntityControllerRenderer extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,
 			double d2, float f) {
 		TileEntityController tile = (TileEntityController) tileentity;
-		if (tile.showHolo && tile.worldObj.getBlockMaterial(tile.xCoord, tile.yCoord+1, tile.zCoord) == Material.air)
+		if (tile.showHolo)
 		{
 			GL11.glPushMatrix();
 			{
