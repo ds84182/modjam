@@ -19,6 +19,7 @@ public class Controller {
 	public ArrayList<IDriver> driverList = new ArrayList<IDriver>();
 	public boolean dirtyDrivers = true;
 	public Stack<StackInfo> moveQueue = new Stack<Controller.StackInfo>();
+	public ArrayList<StackInfo> locks = new ArrayList<Controller.StackInfo>();
 	public int cooldown = 0; //Cooldown = stacksize/8
 	
 	public Controller(TileEntityController t)

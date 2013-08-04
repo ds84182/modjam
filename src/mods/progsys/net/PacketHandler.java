@@ -39,6 +39,10 @@ public class PacketHandler implements IPacketHandler {
 				if (tile.driver != null)
 				{
 					tile.driver.filter = state.filter;
+					if (tile.net.controller != null)
+					{
+						tile.net.sys.dirtyDrivers = true;
+					}
 				}
 				tile.worldObj.markBlockForUpdate(state.pos.x, state.pos.y, state.pos.z);
 			}
