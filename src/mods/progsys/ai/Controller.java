@@ -134,6 +134,7 @@ public class Controller {
 										{
 											//Find number of item in all inventories
 											int itemNum = 0;
+											ArrayList<StackInfo> sinfo = new ArrayList<Controller.StackInfo>();
 											for (IDriver drv : driverList)
 											{
 												if (drv != null)
@@ -148,12 +149,39 @@ public class Controller {
 																if (stk.isItemEqual(stack))
 																{
 																	itemNum+=stk.stackSize;
+																	sinfo.add(new StackInfo(drv, e));
 																}
 															}
 														}
 												}
 											}
 											//Now, divide it between the dests!
+											int others = (int) Math.floor(itemNum/sinfo.size());;
+											int self;
+											if (itemNum % 1 == 1)
+											{
+												//Odd
+												self = others+1;
+											}
+											else
+											{
+												self = others;
+											}
+											for (StackInfo stkinfo : sinfo)
+											{
+												if (stkinfo.driver != driver)
+												{
+													ItemStack kcats = stkinfo.driver.getStack(stkinfo.slot);
+													kcats.stackSize = others;
+													stkinfo.driver.setStack(stkinfo.slot, kcats);
+												}
+												else
+												{
+													ItemStack kcats = stkinfo.driver.getStack(stkinfo.slot);
+													kcats.stackSize = self;
+													stkinfo.driver.setStack(stkinfo.slot, kcats);
+												}
+											}
 										}
 									}
 									else
