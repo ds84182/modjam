@@ -43,11 +43,21 @@ public class ItemDriver implements IDriver {
 
 	@Override
 	public ItemStack getStack(int slot) {
+		if (inv != null && inv instanceof ISidedInventory)
+		{
+			ISidedInventory sided = (ISidedInventory) inv;
+			slot = sided.getAccessibleSlotsFromSide(tile.facing.getOpposite().ordinal())[slot];
+		}
 		return inv != null ? inv.getStackInSlot(slot) : null;
 	}
 
 	@Override
 	public void setStack(int slot, ItemStack stack) {
+		if (inv != null && inv instanceof ISidedInventory)
+		{
+			ISidedInventory sided = (ISidedInventory) inv;
+			slot = sided.getAccessibleSlotsFromSide(tile.facing.getOpposite().ordinal())[slot];
+		}
 		inv.setInventorySlotContents(slot, stack);
 		inv.onInventoryChanged();
 	}
