@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -23,6 +24,7 @@ public class OreRenderingHandler implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
+		GL11.glDisable(GL11.GL_LIGHTING);
 		World w = Minecraft.getMinecraft().theWorld;
 		Icon stone = Block.stone.getIcon(0, 0);
 		Tessellator.instance.startDrawingQuads();
@@ -34,13 +36,14 @@ public class OreRenderingHandler implements ISimpleBlockRenderingHandler {
 		renderer.renderFaceYPos(Block.stone, 0,0,0 , stone);
 		renderer.renderFaceZPos(Block.stone, 0,0,0 , stone);
 		Tessellator.instance.draw();
-		render(0,0,0,w.getSeed());
+		render(1,1,1,w.getSeed());
+		GL11.glEnable(GL11.GL_LIGHTING);
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		renderer.renderBlockAllFaces(Block.stone, x, y, z);
+		//renderer.renderBlockAllFaces(Block.stone, x, y, z);
 		World w = Minecraft.getMinecraft().theWorld;
 		render(x,y,z,w.getSeed());
 		return true;
@@ -61,12 +64,32 @@ public class OreRenderingHandler implements ISimpleBlockRenderingHandler {
 		int numCrystals = rand.nextInt(24)+8;
 		GL11.glColor3f(0F, 0.64F, 0.022558F);
 		GL11.glPushMatrix();
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		Tessellator tess = Tessellator.instance;
-		GL11.glTranslated(tess.xOffset,tess.yOffset,tess.zOffset);
+		GL11.glTranslated(tess.xOffset+x+0.5D,tess.yOffset+y+0.5D,tess.zOffset+z+0.5D);
+		//GL11.glScaled(1D, -1D, 1D);
+		double[][] rots = {
+				{0D,0D,0D},
+				{0D,0D,0D},
+				{0D,0D,0D},
+				{0D,0D,0D},
+				{0D,0D,0D},
+				{0D,0D,0D},
+		};
 		for (int i = 0; i<numCrystals; i++)
 		{
+			GL11.glPushMatrix();
+			int side = rand.nextInt(6);
+			GL11.glRotated(90D, rots[side][0], rots[side][1], rots[side][2]);
+			int pos = rand.nextInt(255);
+			int cy = (pos%16);
+			int cx = (pos-cy)/16;
+			GL11.glTranslated(0D, 0.5D, 0D);
+			GL11.glTranslated((cx-8)/16D,0D,(cy-8)/16D);
 			crystal.render();
+			GL11.glPopMatrix();
 		}
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glPopMatrix();
 	}
 
