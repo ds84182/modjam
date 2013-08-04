@@ -42,6 +42,7 @@ public class PacDispat {
 		packet.channel = "ProgSys";
 		packet.data = new byte[data.length+1];
 		packet.data[0] = (byte) type;
+		packet.length = packet.data.length;
 		for (int i = 0; i<data.length; i++)
 		{
 			packet.data[i+1] = data[i];

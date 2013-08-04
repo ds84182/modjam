@@ -137,7 +137,8 @@ public class TileEntityInventoryInterface extends TileEntityNetworkBase implemen
 
 	@Override
 	public void onRemove() {
-		net.remove(this);
+		if (net != null)
+			net.remove(this);
 	}
 
 	@Override
