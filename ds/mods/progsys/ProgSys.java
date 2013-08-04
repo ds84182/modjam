@@ -20,6 +20,7 @@ import ds.mods.progsys.items.ItemCrystal;
 import ds.mods.progsys.items.ItemWrench;
 import ds.mods.progsys.net.PacDispat;
 import ds.mods.progsys.net.PacketHandler;
+import ds.mods.progsys.oregen.CrystalGenerator;
 import ds.mods.progsys.tile.TileEntityController;
 import ds.mods.progsys.tile.TileEntityInventoryInterface;
 import ds.mods.progsys.tile.TileEntityWire;
@@ -87,6 +88,8 @@ public class ProgSys {
 		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
 		
 		MinecraftForge.EVENT_BUS.register(new PlayerEvents());
+		
+		GameRegistry.registerWorldGenerator(new CrystalGenerator());
 		
 		proxy.registerRenderInfo();
 		PacDispat.initPacketStuff();
