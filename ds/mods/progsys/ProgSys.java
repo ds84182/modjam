@@ -12,6 +12,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ds.mods.progsys.blocks.BlockController;
+import ds.mods.progsys.blocks.BlockCrystalOre;
 import ds.mods.progsys.blocks.BlockInventoryInterface;
 import ds.mods.progsys.blocks.BlockWire;
 import ds.mods.progsys.events.common.PlayerEvents;
@@ -30,6 +31,7 @@ public class ProgSys {
 	public static BlockController controller;
 	public static BlockWire wire;
 	public static BlockInventoryInterface iinterface;
+	public static BlockCrystalOre crystalOre;
 	
 	public static ItemWrench wrench;
 	
@@ -64,6 +66,11 @@ public class ProgSys {
 		GameRegistry.registerBlock(iinterface, "InventoryInterface");
 		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
 		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInvInterface");
+		
+		crystalOre = new BlockCrystalOre(Config.CrystalOreID, Material.glass);
+		crystalOre.setUnlocalizedName("ds.progsys.crystalore");
+		GameRegistry.registerBlock(crystalOre, "CrystalOre");
+		LanguageRegistry.addName(crystalOre, "ds.progsys.crystalOre");
 		
 		wrench = new ItemWrench(Config.WrenchID);
 		wrench.setUnlocalizedName("ds.progsys.wrench");

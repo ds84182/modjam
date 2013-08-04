@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -19,15 +21,26 @@ public class OreRenderingHandler implements ISimpleBlockRenderingHandler {
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 		World w = Minecraft.getMinecraft().theWorld;
+		Icon stone = Block.stone.getIcon(0, 0);
+		renderer.renderFaceXNeg(Block.stone, 0,0,0 , stone);
+		renderer.renderFaceYNeg(Block.stone, 0,0,0 , stone);
+		renderer.renderFaceZNeg(Block.stone, 0,0,0 , stone);
+		renderer.renderFaceXPos(Block.stone, 0,0,0 , stone);
+		renderer.renderFaceYPos(Block.stone, 0,0,0 , stone);
+		renderer.renderFaceZPos(Block.stone, 0,0,0 , stone);
+		Tessellator.instance.startDrawingQuads();
+		Tessellator.instance.setColorOpaque_F(255, 255, 255);
 		render(0,0,0,w.getSeed());
+		Tessellator.instance.draw();
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
+		renderer.renderBlockAllFaces(Block.stone, x, y, z);
 		World w = Minecraft.getMinecraft().theWorld;
 		render(x,y,z,w.getSeed());
-		return false;
+		return true;
 	}
 	
 	public void render(int x, int y, int z, long seed)
