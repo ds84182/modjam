@@ -1,6 +1,7 @@
 package ds.mods.progsys.ai;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 import net.minecraft.item.ItemStack;
@@ -20,6 +21,7 @@ public class Controller {
 	public boolean dirtyDrivers = true;
 	public Stack<StackInfo> moveQueue = new Stack<Controller.StackInfo>();
 	public ArrayList<StackInfo> locks = new ArrayList<Controller.StackInfo>();
+	public HashMap<IDriver,ArrayList<ArrayList<IDriver>>> multiples = new HashMap<IDriver, ArrayList<ArrayList<IDriver>>>(); //Stores the multiples of driver stuff.
 	public int cooldown = 0; //Cooldown = stacksize/8
 	
 	public Controller(TileEntityController t)
@@ -47,12 +49,39 @@ public class Controller {
 			System.out.println("Drivers dirty");
 			driverList.clear();
 			moveQueue.clear();
+			multiples.clear();
 			for (INetworkBase netbase : tile.net.tileMap.values())
 			{
 				if (netbase.getType() == EnumNBType.INTERFACE)
 				{
 					System.out.println("Found "+netbase);
 					driverList.add(netbase.getInterfaceDriver());
+					
+				}
+			}
+			for (IDriver driver : driverList)
+			{
+				System.out.println("Finding dupe filter params");
+				ArrayList<ArrayList<IDriver>> whereIsYourGodNow = new ArrayList<ArrayList<IDriver>>();
+				for (ItemStack stack : driver.getItemFilter().stacks)
+				{
+					ArrayList<IDriver> dupes = new ArrayList<IDriver>();
+					whereIsYourGodNow.add(dupes);
+					for (IDriver drv : driverList)
+					{
+						if (drv != driver)
+						{
+							if (driver.getItemFilter().not == drv.getItemFilter().not)
+								for (ItemStack stk : drv.getItemFilter().stacks)
+								{
+									if (stk.isItemEqual(stack))
+									{
+										dupes.add(drv);
+										break;
+									}
+								}
+						}
+					}
 				}
 			}
 			dirtyDrivers = false;
