@@ -28,7 +28,7 @@ public class TileEntityController extends TileEntityNetworkBase implements IOnPl
 			return true;
 		}
 		System.out.println("Conflict");
-		this.conflictMap.put(side, "Network already contains a Controller!");
+		//this.conflictMap.put(side, "Network already contains a Controller!");
 		return false;
 	}
 

@@ -25,6 +25,17 @@ public class BlockInventoryInterface extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public int getRenderBlockPass() {
+		return 0;
+	}
+
+	@Override
+	public boolean canRenderInPass(int pass) {
+		return super.canRenderInPass(pass);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int par1, int par2) {
 		return par1 == par2 ? socket : blockIcon;
 	}
