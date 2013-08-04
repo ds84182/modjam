@@ -19,7 +19,7 @@ public class CrystalGenerator implements IWorldGenerator {
 				int firstBlockXCoord = chunkX*16 + random.nextInt(16);
 				int firstBlockYCoord = random.nextInt(45);
 				int firstBlockZCoord = chunkZ*16 + random.nextInt(16);
-				System.out.println(firstBlockXCoord+","+firstBlockYCoord+","+firstBlockZCoord);
+				//System.out.println(firstBlockXCoord+","+firstBlockYCoord+","+firstBlockZCoord);
 				(new WorldGenMinable(Config.CrystalOreID, 13)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 			}
 		}

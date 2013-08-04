@@ -70,7 +70,7 @@ public class ProgSys {
 		LanguageRegistry.addName(iinterface, "ds.progsys.invinterface");
 		GameRegistry.registerTileEntity(TileEntityInventoryInterface.class, "teInvInterface");
 		
-		crystalOre = new BlockCrystalOre(Config.CrystalOreID, Material.glass);
+		crystalOre = new BlockCrystalOre(Config.CrystalOreID, Material.rock);
 		crystalOre.setUnlocalizedName("ds.progsys.crystalore");
 		GameRegistry.registerBlock(crystalOre, "CrystalOre");
 		LanguageRegistry.addName(crystalOre, "ds.progsys.crystalOre");
