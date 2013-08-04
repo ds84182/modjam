@@ -20,7 +20,7 @@ public class ItemHolos extends ItemPS {
 	public String getItemDisplayName(ItemStack par1ItemStack) {
 		return par1ItemStack.getItemDamage() == 0 ? LanguageRegistry.instance().getStringLocalization("item.ds.progsys.holos.pixel.name") : LanguageRegistry.instance().getStringLocalization("item.ds.progsys.holos.array.name");
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int par1) {

@@ -91,8 +91,8 @@ public class ProgSys {
 		holos = new ItemHolos(Config.HolosID);
 		holos.setUnlocalizedName("ds.progsys.holos");
 		GameRegistry.registerItem(holos, "Holos");
-		LanguageRegistry.addName("item.ds.progsys.holos.pixel.name", "ds.progsys.holopixel");
-		LanguageRegistry.addName("item.ds.progsys.holos.array.name", "ds.progsys.holoarray");
+		LanguageRegistry.instance().addStringLocalization("item.ds.progsys.holos.pixel.name", "ds.progsys.holopixel");
+		LanguageRegistry.instance().addStringLocalization("item.ds.progsys.holos.array.name", "ds.progsys.holoarray");
 		
 		LanguageRegistry.instance().loadLocalization(getClass().getResource("/assets/progsys/lang/en_US.lang"), "en_US", false);
 		
@@ -107,7 +107,7 @@ public class ProgSys {
 			new ItemStack(crystal),new ItemStack(crystal),new ItemStack(crystal)
 		});
 		
-		GameRegistry.addShapelessRecipe(new ItemStack(holos,1,1), new Object[]{
+		GameRegistry.addShapelessRecipe(new ItemStack(holos,2,1), new Object[]{
 			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos),
 			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos),
 			new ItemStack(holos),new ItemStack(holos),new ItemStack(holos)
