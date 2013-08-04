@@ -134,7 +134,7 @@ public class Controller {
 						ItemStack item = info.driver.getStack(info.slot);
 						if (item != null)
 						{
-							cooldown += item.stackSize/8;
+							cooldown += item.stackSize/16;
 							info.dest.addItemStack(item);
 							info.driver.setStack(info.slot, null);
 						}
@@ -163,7 +163,7 @@ public class Controller {
 										ItemStack item = info.driver.getStack(info.slot);
 										if (driver.addItemStack(item))
 										{
-											cooldown += item.stackSize/8;
+											cooldown += item.stackSize/16;
 											info.driver.setStack(info.slot, null);
 											break;
 										}
