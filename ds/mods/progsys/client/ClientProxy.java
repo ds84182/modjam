@@ -22,8 +22,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityController.class, new TileEntityControllerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryInterface.class, new TileEntityIInterfaceRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWire.class, new TileEntityWireRenderer());
-		this.CrystalRenderID = RenderingRegistry.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(CrystalRenderID, new OreRenderingHandler());
 	}
 	
 	public World getClientWorld()
