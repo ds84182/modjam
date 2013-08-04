@@ -10,4 +10,9 @@ public class ModelCrystal {
 	{
 		model.renderAll();
 	}
+	
+	public void renderTesslator()
+	{
+		//Render this while the tesslator is tesslating!
+	}
 }
