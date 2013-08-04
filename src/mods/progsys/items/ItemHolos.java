@@ -1,4 +1,4 @@
-package ds.mods.progsys.client.holo;
+package ds.mods.progsys.items;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import ds.mods.progsys.items.ItemPS;
 
 public class ItemHolos extends ItemPS {
 	public Icon pixel;
