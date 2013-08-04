@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import org.lwjgl.opengl.GL11;
 
@@ -136,6 +138,11 @@ public class HoloInventoryInterface extends HoloGui {
 					{
 						GL11.glScaled(0.5D, 0.5D, 0.5D);
 					}
+				}
+				if (MinecraftForgeClient.getItemRenderer(stacks[stackAt], ItemRenderType.ENTITY) != null)
+				{
+					GL11.glScaled(0.5D, 0.5D, 0.5D);
+					GL11.glTranslated(0D, -1.5D, 0D);
 				}
 				//Now, try to scale the item so that it perfectly fits the box
 				GL11.glScaled(ms/32D,ms/32D,1D);
