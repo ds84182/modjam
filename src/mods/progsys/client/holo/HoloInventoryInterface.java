@@ -139,11 +139,6 @@ public class HoloInventoryInterface extends HoloGui {
 						GL11.glScaled(0.5D, 0.5D, 0.5D);
 					}
 				}
-				if (MinecraftForgeClient.getItemRenderer(stacks[stackAt], ItemRenderType.ENTITY) != null)
-				{
-					GL11.glScaled(0.5D, 0.5D, 0.5D);
-					GL11.glTranslated(0D, -1.5D, 0D);
-				}
 				//Now, try to scale the item so that it perfectly fits the box
 				GL11.glScaled(ms/32D,ms/32D,1D);
 				if (sq == 1)
@@ -153,6 +148,11 @@ public class HoloInventoryInterface extends HoloGui {
 				else
 				{
 					GL11.glTranslated(0D,-0.125D+(1/(128D/(sq*2))),0D);
+				}
+				if (MinecraftForgeClient.getItemRenderer(stacks[stackAt], ItemRenderType.ENTITY) != null)
+				{
+					GL11.glScaled(0.5D, 0.5D, 1D);
+					//GL11.glTranslated(0D, -1.5D, 0D);
 				}
 				//GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 				RenderItem.renderInFrame = true;
