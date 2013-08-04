@@ -12,16 +12,6 @@ public class ModelCrystal {
 	
 	public void render()
 	{
-		for (Face f : model.groupObjects.get(0).faces)
-		{
-			GL11.glBegin(f.vertices.length == 4 ? GL11.GL_QUADS : GL11.GL_TRIANGLES);
-			
-			for (Vertex v : f.vertices)
-			{
-				GL11.glVertex3f(v.x, v.y, v.z);
-			}
-			
-			GL11.glEnd();
-		}
+		model.renderAll();
 	}
 }
