@@ -73,10 +73,11 @@ public class PlayerEvents {
 				else
 				{
 					//Hand has something.
-					if (event.entityPlayer.worldObj.isRemote && tile.driver != null && tile.driver.filter != null && !event.entityPlayer.isSneaking())
+					if (tile.driver != null && tile.driver.filter != null && !event.entityPlayer.isSneaking())
 					{
 						tile.driver.filter.stacks.add(stack.copy());
-						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+						if (event.entityPlayer.worldObj.isRemote)
+							PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
 						player.swingItem();
 						event.setCanceled(true);
 					}
