@@ -142,6 +142,14 @@ public class ProgSys {
 			'S',new ItemStack(Item.silk),
 		});
 		
+		GameRegistry.addShapedRecipe(new ItemStack(wrench), new Object[]{
+			"I I",
+			"III",
+			" W ",
+			'I',new ItemStack(Item.ingotIron),
+			'W',new ItemStack(Block.cloth,1,14),
+		});
+		
 		proxy.registerRenderInfo();
 		PacDispat.initPacketStuff();
 	}
