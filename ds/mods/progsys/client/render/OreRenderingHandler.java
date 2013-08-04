@@ -9,6 +9,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import ds.mods.progsys.ProgSys;
 import ds.mods.progsys.client.model.ModelCrystal;
@@ -22,16 +25,16 @@ public class OreRenderingHandler implements ISimpleBlockRenderingHandler {
 			RenderBlocks renderer) {
 		World w = Minecraft.getMinecraft().theWorld;
 		Icon stone = Block.stone.getIcon(0, 0);
+		Tessellator.instance.startDrawingQuads();
+		Tessellator.instance.setColorOpaque(255, 255, 255);
 		renderer.renderFaceXNeg(Block.stone, 0,0,0 , stone);
 		renderer.renderFaceYNeg(Block.stone, 0,0,0 , stone);
 		renderer.renderFaceZNeg(Block.stone, 0,0,0 , stone);
 		renderer.renderFaceXPos(Block.stone, 0,0,0 , stone);
 		renderer.renderFaceYPos(Block.stone, 0,0,0 , stone);
 		renderer.renderFaceZPos(Block.stone, 0,0,0 , stone);
-		Tessellator.instance.startDrawingQuads();
-		Tessellator.instance.setColorOpaque_F(255, 255, 255);
-		render(0,0,0,w.getSeed());
 		Tessellator.instance.draw();
+		render(0,0,0,w.getSeed());
 	}
 
 	@Override
@@ -56,10 +59,15 @@ public class OreRenderingHandler implements ISimpleBlockRenderingHandler {
 		 */
 		Random rand = new Random((long)Math.pow(x*y,z)*seed);
 		int numCrystals = rand.nextInt(24)+8;
+		GL11.glColor3f(0F, 0.64F, 0.022558F);
+		GL11.glPushMatrix();
+		Tessellator tess = Tessellator.instance;
+		GL11.glTranslated(tess.xOffset,tess.yOffset,tess.zOffset);
 		for (int i = 0; i<numCrystals; i++)
 		{
-			crystal.renderTessellator();
+			crystal.render();
 		}
+		GL11.glPopMatrix();
 	}
 
 	@Override
