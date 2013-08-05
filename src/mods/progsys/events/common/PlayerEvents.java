@@ -27,16 +27,22 @@ public class PlayerEvents {
 				TileEntityInventoryInterface tile = (TileEntityInventoryInterface) player.worldObj.getBlockTileEntity(event.x, event.y, event.z);
 				/*
 				 * Hand empty: Toggle holo
-				 * Shift + Hand Empty: //Take last block out of filter
+				 * Shift + Hand Empty: Take last block out of filter
 				 * Hand full: Add to filter
 				 * Hand has wrench: Go through sides
 				 * Shift + Hand has wrench: Toggle NOT mode
-				 * Jump + Shift + Hand has wrench: Put wrench into filter
+				 * Sprint + Shift + Hand has wrench: Put wrench into filter
 				 */
 				if (tile != null)
 				if (stack == null && player.isSneaking())
 				{
-					
+					if (tile.driver != null && tile.driver.filter != null && !event.entityPlayer.isSneaking())
+					{
+						tile.driver.filter.stacks.remove(tile.driver.filter.stacks.size());
+						PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+						player.swingItem();
+						event.setCanceled(true);
+					}
 				}
 				else if (stack == null)
 				{
@@ -59,6 +65,17 @@ public class PlayerEvents {
 							player.swingItem();
 							event.setCanceled(true);
 						}
+					}
+				}
+				else if (stack.getItem() instanceof ItemWrench && player.isSneaking() && player.isSprinting())
+				{
+					if (tile.driver != null && tile.driver.filter != null && !event.entityPlayer.isSneaking())
+					{
+						tile.driver.filter.stacks.add(stack.copy());
+						if (event.entityPlayer.worldObj.isRemote)
+							PacDispat.sendPacketToServer(new InventoryInterfaceState(tile));
+						player.swingItem();
+						event.setCanceled(true);
 					}
 				}
 				else if (stack.getItem() instanceof ItemWrench)
