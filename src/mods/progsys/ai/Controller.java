@@ -118,7 +118,7 @@ public class Controller {
 									//If there is a more sutable place for the item, send it there.
 									//A place it sutable if this has a filter with no items in it and the other has a filter with that item in it and it's not on not mode
 									//We also need to find if there is another place that requests this item. We will make an integer of how many of that single item is on the network
-									if (multiples.containsKey(driver))
+									if (multiples.containsKey(null)) //TODO: Port all this code to Lua after Modjam
 									{
 										//We look at how many of these we have.
 										boolean doesMatch = false;

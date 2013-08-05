@@ -36,6 +36,7 @@ import ds.mods.progsys.tile.TileEntityWire;
 @Mod(modid="ProgSys",name="ProgSys")
 @NetworkMod(channels={"ProgSys"}, packetHandler=PacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class ProgSys {
+	//TODO: Reprogram the whole mod in Lua for better extendabillity
 	
 	public static BlockController controller;
 	public static BlockWire wire;
